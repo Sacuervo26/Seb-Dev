@@ -76,135 +76,74 @@
     </ul>    
   </div>
   
-  <!-- Menú móvil alternativo -->
-  <div class="navbar-end lg:hidden">
-    <input 
-      type="checkbox" 
-      id="mobile-menu-toggle" 
-      class="hidden"
-    >
-    <label 
-      for="mobile-menu-toggle" 
-      class="btn btn-ghost px-2 cursor-pointer" 
-      aria-label="Menú móvil" 
-      aria-expanded="false" 
-      aria-controls="mobile-menu"
-    >
-      <svg 
-        xmlns="http://www.w3.org/2000/svg" 
-        class="h-6 w-6" 
-        fill="none" 
-        viewBox="0 0 24 24" 
-        stroke="currentColor"
-      >
-        <path 
-          stroke-linecap="round" 
-          stroke-linejoin="round" 
-          stroke-width="2" 
-          d="M4 6h16M4 12h16M4 18h16" 
-        />
+  <!-- Menú móvil - Versión corregida -->
+  <div class="navbar-end lg:hidden relative">
+    <!-- Botón hamburguesa -->
+    <button id="mobile-menu-button" class="btn btn-ghost px-2 cursor-pointer" aria-label="Menú móvil" aria-expanded="false">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
       </svg>
-    </label>
-    <ul 
-      id="mobile-menu" 
-      class="absolute md:right-12 max-md::right-5 top-20 bg-white/60 rounded-lg z-50 p-2 shadow-lg hidden flex-col w-fit whitespace-nowrap"
-    >
-      <li class="w-full text-center">
-        <a 
-          href="#home" 
-          class="relative inline-block text-black hover:text-[#EEB30D] font-medium py-2 px-1 transition-colors duration-300"
-        >
-          <span 
-            class="relative after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-0 after:bg-[#EEB30D] after:transition-all after:duration-300 hover:after:w-full"
-          >
-            INICIO
-          </span>
-        </a>
-      </li>
-      <li class="w-full text-center">
-        <a 
-          href="#about" 
-          class="relative inline-block text-black hover:text-[#EEB30D] font-medium py-2 px-1 transition-colors duration-300"
-        >
-          <span 
-            class="relative after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-0 after:bg-[#EEB30D] after:transition-all after:duration-300 hover:after:w-full"
-          >
-            SOBRE MI
-          </span>
-        </a>
-      </li>
-      <li class="w-full text-center">
-        <a 
-          href="#services" 
-          class="relative inline-block text-black hover:text-[#EEB30D] font-medium py-2 px-1 transition-colors duration-300"
-        >
-          <span 
-            class="relative after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-0 after:bg-[#EEB30D] after:transition-all after:duration-300 hover:after:w-full"
-          >
-            SERVICIOS
-          </span>
-        </a>
-      </li>
-      <li class="w-full text-center">
-        <a 
-          href="#works" 
-          class="relative inline-block text-black hover:text-[#EEB30D] font-medium py-2 px-1 transition-colors duration-300"
-        >
-          <span 
-            class="relative after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-0 after:bg-[#EEB30D] after:transition-all after:duration-300 hover:after:w-full"
-          >
-            TRABAJOS
-          </span>
-        </a>
-      </li>
-      <li class="w-full text-center">
-        <a 
-          href="#contact" 
-          class="relative inline-block text-black hover:text-[#EEB30D] font-medium py-2 px-1 transition-colors duration-300"
-        >
-          <span 
-            class="relative after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-0 after:bg-[#EEB30D] after:transition-all after:duration-300 hover:after:w-full"
-          >
-            CONTACTO
-          </span>
-        </a>          
-      </li>
+    </button>
+    
+    <!-- Menú desplegable -->
+    <ul id="mobile-menu" class="absolute right-0 top-full mt-2 bg-black/90 rounded-lg z-50 p-2 shadow-lg hidden flex-col w-48 space-y-2">
+      <li><a href="#home" class="block text-white hover:text-[#EEB30D] font-medium py-2 px-4">INICIO</a></li>
+      <li><a href="#about" class="block text-white hover:text-[#EEB30D] font-medium py-2 px-4">SOBRE MI</a></li>
+      <li><a href="#services" class="block text-white hover:text-[#EEB30D] font-medium py-2 px-4">SERVICIOS</a></li>
+      <li><a href="#works" class="block text-white hover:text-[#EEB30D] font-medium py-2 px-4">TRABAJOS</a></li>
+      <li><a href="#contact" class="block text-white hover:text-[#EEB30D] font-medium py-2 px-4">CONTACTO</a></li>
     </ul>
   </div>
 </nav>
 
 <style>
-  #mobile-menu-toggle:checked ~ #mobile-menu {
+  /* Animación para el menú móvil */
+  #mobile-menu {
+    display: none;
+    animation: fadeIn 0.2s ease-out;
+  }
+  
+  #mobile-menu.active {
     display: flex;
   }
   
-  /* Estilos específicos para móvil en horizontal */
-  @media (max-width: 640px) and (orientation: landscape) {
-    #mobile-menu {
-      position: fixed;
-      right: 0.5rem;
-      left: 0.5rem;
-      top: 4rem;
-      max-height: 60vh;
-      width: auto;
-      overflow-y: auto;
-    }
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
   }
 </style>
 
-<script>
-  document.addEventListener('DOMContentLoaded', function() {
-    const mobileMenu = document.getElementById('mobile-menu');
-    const mobileToggle = document.getElementById('mobile-menu-toggle') as HTMLInputElement;
-    const mobileLinks = document.querySelectorAll('#mobile-menu a');
-
-    if (mobileMenu && mobileToggle && mobileLinks) {
-      mobileLinks.forEach(link => {
-        link.addEventListener('click', () => {
-          mobileToggle.checked = false;
-          mobileMenu.style.display = 'none';
-        });
+<script is:inline>
+document.addEventListener('DOMContentLoaded', function() {
+  const menuButton = document.getElementById('mobile-menu-button');
+  const mobileMenu = document.getElementById('mobile-menu');
+  
+  if (menuButton && mobileMenu) {
+    menuButton.addEventListener('click', function() {
+      const isExpanded = this.getAttribute('aria-expanded') === 'true';
+      
+      // Alternar estado del menú
+      mobileMenu.classList.toggle('active');
+      this.setAttribute('aria-expanded', !isExpanded);
+    });
+    
+    // Cerrar menú al hacer clic en un enlace
+    document.querySelectorAll('#mobile-menu a').forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.remove('active');
+        menuButton.setAttribute('aria-expanded', 'false');
       });
-    }
-  });
+    });
+    
+    // Cerrar menú al hacer clic fuera de él
+    document.addEventListener('click', function(event) {
+      if (!event.target.closest('#mobile-menu') && 
+          !event.target.closest('#mobile-menu-button') &&
+          mobileMenu.classList.contains('active')) {
+        mobileMenu.classList.remove('active');
+        menuButton.setAttribute('aria-expanded', 'false');
+      }
+    });
+  }
+});
 </script>
