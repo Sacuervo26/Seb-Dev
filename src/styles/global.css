@@ -1,0 +1,19 @@
+@import "tailwindcss";
+@plugin "daisyui";
+
+@font-face {
+    font-family: Quicksand;
+    font-style: normal;
+    font-weight: 200 700;
+    font-display: swap;
+    src: url('/src/assets/fonts/dmsans/Quicksand-VariableFont_wght.ttf') format('truetype');
+  }
+
+@theme {
+
+    --font-quicksand: "Quicksand", "sans-serif";
+
+    --color-text-body: #525260;
+    --color-primary: #EEB30D;
+}
+
