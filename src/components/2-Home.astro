@@ -1,34 +1,35 @@
-<section class="hero min-h-screen relative overflow-hidden">
+<section class="hero h-full relative overflow-hidden">
     <!-- Div para la imagen de fondo (absolute) -->
     <div class="absolute inset-0 z-0">
         <img 
             src="/bg1.jpg" 
             alt="Fondo" 
             class="w-full h-full object-cover object-center"
+            loading="eager"
         />
         <div class="absolute inset-0 bg-black/60"></div> <!-- Overlay oscuro -->
     </div>
 
     <!-- Contenido principal (relative para superponer) -->
-    <div class="hero-content text-neutral-content text-center relative z-10">
-        <div class="max-w-xl">
+    <div class="container mx-auto flex items-center justify-center h-full px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
+        <div class="text-center relative z-10 w-full max-w-md sm:max-w-xl md:max-w-2xl">
             <!-- Avatar con efectos mejorados -->
-            <div class="group avatar my-4 transition-all hover:scale-105 overflow-hidden mt-20">
-                <a href="#home" class="mask mask-squircle w-40 border-2 border-white/80 rounded-full transition-all duration-200 overflow-hidden">
-                    <img src="/sebas.png" alt="Sebastián Cuervo" />
+            <div class="group avatar transition-all hover:scale-105 overflow-hidden mb-4 sm:mb-6 mt-12">
+                <a href="#home" class="mask mask-squircle w-28 sm:w-32 md:w-36 border-2 border-white/80 rounded-full transition-all duration-200 inline-block">
+                    <img src="/sebas.png" alt="Sebastián Cuervo" class="w-full h-full object-cover" />
                 </a>
             </div>
             
-            <h1 class="mb-1 text-2xl md:text-3xl lg:text-4xl font-bold text-gray-200">Sebastian Cuervo</h1>
-            <p class="text-sm mb-5 font-light text-gray-200 italic ">Arquitecto <br> & <br> Diseñador - Desarrollador Web</p>
+            <h1 class="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-200 mb-2 sm:mb-3">Sebastian Cuervo</h1>
+            <p class="text-sm sm:text-base text-gray-200 font-light italic mb-4 sm:mb-6">Arquitecto <span class="mx-2">•</span> Diseñador <span class="mx-2">•</span> Desarrollador Web</p>
             
-            <p class="mb-5 text-md md:text-lg text-justify text-gray-200 leading-relaxed">
-                Arquitecto y Diseñador - Desarrollador Web, una combinación única que me permite abordar cada proyecto con una visión creativa y meticulosa. Mi formación en arquitectura me enseña a pensar en espacios, proporciones y experiencias, lo que aplico al Diseño y Desarrollo web para crear interfaces intuitivas, estéticas y funcionales. Cada línea de código, como cada trazo en un plano, está pensada para construir soluciones sólidas, armónicas y adaptadas a quien las habita. Más que páginas web, diseño experiencias digitales con la misma pasión y precisión con que diseño espacios físicos.
+            <p class="text-sm sm:text-base text-gray-200 text-justify mb-6 sm:mb-8 leading-relaxed sm:leading-loose">
+                Arquitecto y Diseñador - Desarrollador Web, una combinación única que me permite abordar cada proyecto con una visión creativa y meticulosa. Mi formación en arquitectura me enseña a pensar en espacios, proporciones y experiencias, lo que aplico al Diseño y Desarrollo web para crear interfaces intuitivas, estéticas y funcionales.
             </p>
             
             <!-- Botón con efectos mejorados -->
-            <div class="group inline-block bg-[#EEB30D] px-6 py-3 mb-8 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:bg-[#FFC72C] cursor-pointer mt-4">
-                <a href="#contact" class="font-medium group-hover:font-semibold text-white">
+            <div class="group inline-block bg-[#EEB30D] px-5 sm:px-6 py-2 sm:py-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:bg-[#FFC72C]">
+                <a href="#contact" class="text-sm sm:text-base font-medium group-hover:font-semibold text-white">
                     Contacto
                 </a>
             </div>

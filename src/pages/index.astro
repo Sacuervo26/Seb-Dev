@@ -6,6 +6,8 @@ import Header from "../components/1-Header.astro";
 import Home from "../components/2-Home.astro";
 import About from "../components/3-About.astro";
 import Services from "../components/4-Services.astro";
+import Works from "../components/5-Works.astro";
+import Footer from "../components/6-Footer.astro";
 // Importa también los componentes de Works y Contact si los tienes
 ---
 
@@ -23,16 +25,12 @@ import Services from "../components/4-Services.astro";
 		<section id="services">
 			<Services />
 		</section>
-		<!-- Añade estas secciones si las tienes -->
 		<section id="works">
-			<!-- Tu componente Works -->
-		</section>
-		<section id="contact">
-			<!-- Tu componente Contact -->
+			<Works />
 		</section>				
 	</main>
 
 	<footer>
-		<!-- Tu footer -->
+		<Footer />
 	</footer>
 </Layout>
