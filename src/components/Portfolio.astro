@@ -1,0 +1,58 @@
+---
+const projects = [
+  {
+    title: "Alma Studio",
+    category: "Website de servicios",
+    description: "Una presentación más clara y agradable para mostrar servicios y transmitir confianza.",
+    image: "/alma-studio.jpg",
+    href: "https://almamakeup.com.co/",
+  },
+  {
+    title: "El Mana",
+    category: "Landing page",
+    description: "Una presencia visual más limpia y directa para comunicar mejor la marca.",
+    image: "/envueltos-el-mana.jpg",
+    href: "https://envueltos-el-mana.vercel.app",
+  },
+];
+---
+
+<section class="page-section page-section-projects px-3 pb-10 sm:px-6">
+  <div class="site-container">
+    <div class="grid gap-6 md:grid-cols-2">
+      {projects.map((project) => (
+        <a href={project.href} target="_blank" rel="noreferrer" class="project-link">
+          <article class="project-card overflow-hidden rounded-[1.8rem]">
+            <div class="project-media relative overflow-hidden bg-slate-50">
+              <img
+                src={project.image}
+                alt={project.title}
+                class="h-full w-full object-cover object-top transition duration-500"
+                loading="lazy"
+              />
+              <div class="absolute left-4 top-4 z-10 sm:left-5 sm:top-5">
+                <span class="project-category-badge">{project.category}</span>
+              </div>
+              <div class="project-image-overlay hidden md:block"></div>
+              <div class="project-caption absolute inset-x-0 bottom-0 z-10 hidden md:block">
+                <div class="project-caption-panel">
+                  <h1 class="font-display text-[1.35rem] font-semibold tracking-[-0.04em] text-slate-950 sm:text-[1.5rem]">
+                    {project.title}
+                  </h1>
+                  <p class="text-sm leading-6 text-slate-600 sm:text-[0.95rem] sm:leading-7">{project.description}</p>
+                  <span class="project-cta inline-flex text-sm font-semibold">Visitar proyecto</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="project-mobile-content md:hidden">
+              <h1 class="font-display text-[1.16rem] font-semibold tracking-[-0.04em] text-slate-950">{project.title}</h1>
+              <p class="mt-2.5 text-[0.84rem] leading-6 text-slate-600">{project.description}</p>
+              <span class="project-mobile-cta mt-4 inline-flex text-[0.84rem] font-semibold">Visitar proyecto</span>
+            </div>
+          </article>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>

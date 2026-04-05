@@ -1,0 +1,83 @@
+---
+const serviceLabels = ["Diseño web", "Desarrollo web", "UI/UX", "Acompañamiento"];
+
+const plans = [
+  {
+    tier: "Básico",
+    price: "$ ---",
+    description: "Landing clara para presentar una marca con mejor presencia visual.",
+    delivery: "Entrega en 5 días",
+    revisions: "2 revisiones",
+    cta: "Empezar",
+    features: ["Diseño de una página", "Jerarquía visual base", "Versión responsive", "Entrega lista para revisar"],
+  },
+  {
+    tier: "Estándar",
+    price: "$ ---",
+    description: "Sitio con más estructura, mejor narrativa y una presencia digital más cuidada.",
+    delivery: "Entrega en 8 días",
+    revisions: "3 revisiones",
+    cta: "Empezar",
+    features: ["Hasta 4 secciones", "Sistema visual definido", "Responsive completo", "Ajustes de contenido"],
+  },
+  {
+    tier: "Premium",
+    price: "$ ---",
+    description: "Propuesta a medida con más detalle visual, criterio y acompañamiento.",
+    delivery: "Entrega en 12 días",
+    revisions: "5 revisiones",
+    cta: "Empezar",
+    features: ["Diseño a medida", "Mayor profundidad visual", "Biblioteca de estilos base", "Hand-off estructurado"],
+  },
+];
+---
+
+<section class="page-section page-section-tight px-3 pb-8 pt-0 sm:px-4 sm:pb-10 md:px-6 lg:px-8">
+  <div class="site-container">
+    <div class="mb-5 mt-1.5 flex flex-wrap justify-center gap-3 sm:mb-6 sm:mt-2 sm:gap-4">
+      {serviceLabels.map((label) => (
+        <span class="inline-flex items-center rounded-full border border-sky-200/80 bg-white/70 px-4 py-2 text-sm font-medium text-slate-700 shadow-[0_8px_20px_rgba(148,163,184,0.08)] transition duration-200 hover:border-sky-300 hover:bg-sky-50/80 hover:text-sky-700">
+          {label}
+        </span>
+      ))}
+    </div>
+
+    <div class="pricing-grid">
+      {plans.map((plan, index) => (
+        <article class:list={["pricing-card", index === 1 && "is-featured"]}>
+          <div class="pricing-card-top">
+            <div class="flex flex-col items-start gap-3 sm:flex-row sm:items-start sm:justify-between">
+              <div>
+                <p class="pricing-tier">{plan.tier}</p>
+                <h2 class="mt-3 font-display text-[1.32rem] font-semibold tracking-[-0.04em] text-slate-950 sm:text-[1.45rem]">
+                  {plan.price}
+                </h2>
+              </div>
+              <span class="pricing-badge">{plan.delivery}</span>
+            </div>
+
+            <p class="pricing-copy mt-4">{plan.description}</p>
+
+            <div class="pricing-meta mt-5">
+              <span>{plan.delivery}</span>
+              <span>{plan.revisions}</span>
+            </div>
+          </div>
+
+          <ul class="pricing-features mt-6">
+            {plan.features.map((feature) => (
+              <li>
+                <span class="pricing-check" aria-hidden="true">✓</span>
+                <span>{feature}</span>
+              </li>
+            ))}
+          </ul>
+
+          <a href="https://wa.me/573005720253" target="_blank" rel="noreferrer" class:list={["pricing-cta mt-7", "is-secondary"]}>
+            {plan.cta}
+          </a>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>

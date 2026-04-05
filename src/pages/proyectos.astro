@@ -1,0 +1,18 @@
+---
+import "../styles/global.css";
+import Layout from "../layouts/Layout.astro";
+import Navbar from "../components/Navbar.astro";
+import Portfolio from "../components/Portfolio.astro";
+import Footer from "../components/Footer.astro";
+---
+
+<Layout
+  title="Seb/Dev | Proyectos"
+  description="Selección de proyectos y direcciones visuales desarrolladas por Seb/Dev."
+>
+  <Navbar currentPath="/proyectos" />
+  <main class="page-main page-main-projects">
+    <Portfolio />
+  </main>
+  <Footer />
+</Layout>

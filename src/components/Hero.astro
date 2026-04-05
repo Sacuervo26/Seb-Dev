@@ -1,0 +1,44 @@
+---
+const labels = [
+  { text: "Diseño web", className: "left-7 top-14 md:left-7" },
+  { text: "Desarrollo web", className: "right-5 top-18 md:right-4" },
+  { text: "UI/UX", className: "left-10 bottom-11 md:left-9" },
+  { text: "Estructura visual", className: "right-8 bottom-9 md:right-7" },
+];
+---
+
+<section class="screen-section hero-section px-3 sm:px-6">
+  <div class="site-container">
+    <div class="hero-stage">
+      {labels.map((label) => (
+        <div class:list={["hero-label", label.className]}>
+          <span class="hero-dot"></span>
+          {label.text}
+        </div>
+      ))}
+
+      <img
+        src="/sebas.png"
+        alt="Sebastian Cuervo"
+        class="hero-portrait"
+        loading="eager"
+      />
+    </div>
+
+    <div class="mx-auto mt-3 max-w-[38rem] text-center sm:mt-4">
+      <span class="eyebrow justify-center">Arquitecto y desarrollador web</span>
+      <h1 class="page-title mt-4">
+        Diseño experiencias digitales claras, modernas y profesionales para marcas y negocios.
+      </h1>
+      <p class="lead mx-auto mt-4">
+        Combino estructura, criterio visual y desarrollo web para crear sitios limpios, bien pensados y fáciles de
+        recorrer.
+      </p>
+
+      <div class="mt-6 flex flex-col items-center justify-center gap-3 sm:flex-row">
+        <a href="/servicios" class="button-primary w-full max-w-sm text-sm sm:w-auto sm:max-w-none sm:text-base">Empezar</a>
+        <a href="https://wa.me/573005720253" target="_blank" rel="noreferrer" class="button-secondary w-full max-w-sm text-sm sm:w-auto sm:max-w-none sm:text-base">Hablemos</a>
+      </div>
+    </div>
+  </div>
+</section>

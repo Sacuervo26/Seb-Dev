@@ -1,17 +1,27 @@
+---
+import FloatingWhatsApp from "../components/FloatingWhatsApp.astro";
+
+const {
+  title = "Seb/Dev | Diseño y desarrollo web moderno",
+  description = "Diseño y desarrollo de sitios web modernos con enfoque visual, estructura clara y experiencia cuidada.",
+} = Astro.props;
+---
+
 <!doctype html>
 <html lang="es">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link
-			rel="stylesheet"
-			href="/src/assets/fonts/fontawesome-free-6.1.2-web/css/all.min.css"
-		/>
-		<meta name="generator" content={Astro.generator} />
-		<title>Sebastian - Portafolio</title>
-	</head>
-	<body class="bg-[#0e0e0e] font-quicksand">
-		<slot />
-	</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#f8fbff" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+  </head>
+  <body class="font-sans">
+    <div class="page-shell">
+      <slot />
+      <FloatingWhatsApp />
+    </div>
+  </body>
 </html>
