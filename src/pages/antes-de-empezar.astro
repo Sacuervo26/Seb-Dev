@@ -1,0 +1,18 @@
+---
+import "../styles/global.css";
+import Layout from "../layouts/Layout.astro";
+import Navbar from "../components/Navbar.astro";
+import BeforeStart from "../components/BeforeStart.astro";
+import Footer from "../components/Footer.astro";
+---
+
+<Layout
+  title="Seb/Dev | Antes de empezar"
+  description="Información previa recomendada para iniciar el desarrollo de tu página web con mejor estructura y menos retrasos."
+>
+  <Navbar currentPath="/antes-de-empezar" />
+  <main class="page-main">
+    <BeforeStart />
+  </main>
+  <Footer />
+</Layout>

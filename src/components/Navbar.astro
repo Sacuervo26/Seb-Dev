@@ -11,13 +11,10 @@ const links = [
 ---
 
 <header class="fixed inset-x-0 top-0 z-50 px-3 pt-3 sm:px-4 md:px-6 lg:px-8">
-  <nav class="site-container card-soft rounded-[1.35rem] px-4 py-3 sm:px-5">
+  <nav class="site-container premium-header rounded-[1.35rem] px-4 py-3 sm:px-5">
     <div class="flex items-center justify-between gap-4">
       <a href="/" class="flex min-w-0 items-center">
-        <div>
-          <p class="font-display text-base font-semibold tracking-[-0.04em] text-slate-900 sm:text-lg">Seb/Dev</p>
-          <p class="hidden text-[0.65rem] uppercase tracking-[0.22em] text-slate-400 sm:block">diseño y desarrollo web</p>
-        </div>
+        <img src="/Logo.png" alt="sebweb.co" class="premium-logo" loading="eager" />
       </a>
 
       <div class="hidden items-center gap-7 lg:flex">
@@ -37,30 +34,33 @@ const links = [
       </div>
 
       <details class="mobile-nav relative lg:hidden">
-        <summary class="mobile-menu-trigger flex h-11 w-11 cursor-pointer list-none items-center justify-center rounded-2xl border border-slate-200 bg-white text-slate-700 marker:content-none">
+        <summary class="mobile-menu-trigger flex h-11 w-11 cursor-pointer list-none items-center justify-center rounded-2xl border border-slate-200 bg-white/88 text-slate-700 marker:content-none">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M4 7h16M4 12h16M4 17h16" />
           </svg>
         </summary>
         <button type="button" class="mobile-nav-backdrop" aria-label="Cerrar menú"></button>
         <div class="mobile-nav-panel card-quiet absolute right-0 mt-3 w-[min(16.5rem,calc(100vw-1rem))] rounded-[1.25rem] p-3 sm:w-[17.25rem]">
-          <div class="mb-2.5 flex items-center gap-3 px-1">
-            <div>
-              <p class="text-[0.68rem] font-semibold uppercase tracking-[0.22em] text-slate-400">Menú</p>
-              <p class="mt-0.5 text-sm font-medium text-slate-700">Seb/Dev</p>
-            </div>
+          <div class="mb-3 flex items-center justify-between gap-3 px-1">
+            <img src="/Logo.png" alt="sebweb.co" class="premium-logo premium-logo-mobile" />
+            <p class="text-[0.68rem] font-semibold uppercase tracking-[0.22em] text-slate-400">Menú</p>
           </div>
+
           <div class="flex flex-col gap-1">
             {links.map((link) => (
               <a
                 href={link.href}
-                class:list={["mobile-nav-link rounded-2xl px-4 py-2.5 text-sm font-medium text-slate-600 transition hover:bg-sky-50 hover:text-slate-900", currentPath === link.href && "is-active"]}
+                class:list={[
+                  "mobile-nav-link rounded-2xl px-4 py-2.5 text-sm font-medium text-slate-600 transition hover:bg-sky-50 hover:text-slate-900",
+                  currentPath === link.href && "is-active",
+                ]}
                 aria-current={currentPath === link.href ? "page" : undefined}
               >
                 {link.label}
               </a>
             ))}
           </div>
+
           <a href="https://wa.me/573005720253" target="_blank" rel="noreferrer" class="button-primary mt-2.5 w-full text-sm">Hablemos</a>
         </div>
       </details>
