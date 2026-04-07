@@ -1,29 +1,16 @@
+---
+const heroTags = [
+  "Diseño web",
+  "Desarrollo web",
+  "UI/UX",
+  "Acompañamiento",
+];
+---
+
 <section class="screen-section hero-section px-3 sm:px-6">
   <div class="site-container">
     <div class="hero-stage">
       <div class="hero-portrait-shell">
-        <div class="hero-tags-left" aria-label="Servicios destacados izquierda">
-          <div class="hero-label">
-            <span class="hero-dot"></span>
-            <span>Diseño web</span>
-          </div>
-          <div class="hero-label">
-            <span class="hero-dot"></span>
-            <span>UI/UX</span>
-          </div>
-        </div>
-
-        <div class="hero-tags-right" aria-label="Servicios destacados derecha">
-          <div class="hero-label">
-            <span class="hero-dot"></span>
-            <span>Desarrollo web</span>
-          </div>
-          <div class="hero-label">
-            <span class="hero-dot"></span>
-            <span>Acompañamiento</span>
-          </div>
-        </div>
-
         <img
           src="/perfil.png"
           alt="Sebastián Cuervo"
@@ -33,7 +20,16 @@
       </div>
     </div>
 
-    <div class="mx-auto mt-3 max-w-[38rem] text-center sm:mt-4">
+    <div class="hero-tags-grid" aria-label="Servicios destacados">
+      {heroTags.map((tag) => (
+        <div class="hero-label">
+          <span class="hero-dot"></span>
+          <span>{tag}</span>
+        </div>
+      ))}
+    </div>
+
+    <div class="mx-auto mt-5 max-w-[38rem] text-center sm:mt-6">
       <span class="eyebrow justify-center">Arquitecto y desarrollador web</span>
       <h1 class="page-title mt-4">
         Diseño experiencias digitales claras, modernas y profesionales para marcas y negocios.
