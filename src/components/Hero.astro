@@ -1,23 +1,29 @@
----
-const labels = [
-  { text: "Diseño web", className: "left-7 top-14 md:left-7" },
-  { text: "Desarrollo web", className: "right-5 top-18 md:right-4" },
-  { text: "UI/UX", className: "left-10 bottom-11 md:left-9" },
-  { text: "Acompañamiento", className: "right-8 bottom-9 md:right-7" },
-];
----
-
 <section class="screen-section hero-section px-3 sm:px-6">
   <div class="site-container">
     <div class="hero-stage">
-      {labels.map((label) => (
-        <div class:list={["hero-label", label.className]}>
-          <span class="hero-dot"></span>
-          {label.text}
-        </div>
-      ))}
-
       <div class="hero-portrait-shell">
+        <div class="hero-tags-left" aria-label="Servicios destacados izquierda">
+          <div class="hero-label">
+            <span class="hero-dot"></span>
+            <span>Diseño web</span>
+          </div>
+          <div class="hero-label">
+            <span class="hero-dot"></span>
+            <span>UI/UX</span>
+          </div>
+        </div>
+
+        <div class="hero-tags-right" aria-label="Servicios destacados derecha">
+          <div class="hero-label">
+            <span class="hero-dot"></span>
+            <span>Desarrollo web</span>
+          </div>
+          <div class="hero-label">
+            <span class="hero-dot"></span>
+            <span>Acompañamiento</span>
+          </div>
+        </div>
+
         <img
           src="/perfil.png"
           alt="Sebastián Cuervo"
