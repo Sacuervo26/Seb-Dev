@@ -1,50 +1,57 @@
 ---
-const heroTags = [
-  "Diseño web",
-  "Desarrollo web",
-  "UI/UX",
-  "Acompañamiento",
-];
+const heroTags = ["Diseño web", "Desarrollo web", "UI/UX", "Acompañamiento"];
 ---
 
-<section class="screen-section hero-section px-3 sm:px-6 relative overflow-hidden">
-  <!-- Decorative floating blobs -->
-  <div class="absolute -right-20 top-16 h-72 w-72 rounded-full bg-sky-200/30 blur-3xl floating-slow" aria-hidden="true"></div>
-  <div class="absolute -left-16 bottom-24 h-56 w-56 rounded-full bg-sky-300/20 blur-3xl floating" aria-hidden="true"></div>
+<section class="hr">
+  <div class="hr-sh a"></div>
+  <div class="hr-sh b"></div>
+  <div class="hr-dt"></div>
 
-  <div class="site-container relative z-10">
-    <div class="hero-stage hero-entrance-1">
-      <div class="hero-portrait-shell">
-        <img
-          src="/perfil.png"
-          alt="Sebastián Cuervo"
-          class="hero-portrait"
-          loading="eager"
-        />
+  <div class="hr-in">
+    <div class="hrc">
+      <div class="hr-tg">
+        {heroTags.map((tag) => <span class="tg">{tag}</span>)}
       </div>
-    </div>
 
-    <div class="hero-tags-grid hero-entrance-2" aria-label="Servicios destacados">
-      {heroTags.map((tag) => (
-        <div class="hero-label">
-          <span class="hero-dot"></span>
-          <span>{tag}</span>
-        </div>
-      ))}
-    </div>
+      <p class="hr-lb">Arquitecto y desarrollador web</p>
 
-    <div class="mx-auto mt-5 max-w-[38rem] text-center sm:mt-6">
-      <span class="eyebrow justify-center hero-entrance-3">Arquitecto y desarrollador web</span>
-      <h1 class="page-title mt-4 hero-entrance-3">
-        Diseño experiencias digitales claras, modernas y profesionales para marcas y negocios.
+      <h1 class="hr-tt">
+        Diseño experiencias digitales <span class="hl">claras, modernas y profesionales</span> para marcas y negocios.
       </h1>
-      <p class="lead mx-auto mt-4 hero-entrance-3">
+
+      <p class="hr-ds">
         Combino estructura, criterio visual y desarrollo web para crear sitios limpios, bien pensados y fáciles de recorrer.
       </p>
 
-      <div class="mt-6 flex flex-col items-center justify-center gap-3 sm:flex-row hero-entrance-4">
-        <a href="/servicios" class="button-primary w-full max-w-sm text-sm sm:w-auto sm:max-w-none sm:text-base">Servicios</a>
-        <a href="https://wa.me/573005720253" target="_blank" rel="noreferrer" class="button-secondary w-full max-w-sm text-sm sm:w-auto sm:max-w-none sm:text-base">Hablemos</a>
+      <div class="hr-bt">
+        <a href="/servicios" class="bp">
+          Servicios
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <a href="https://wa.me/573005720253" target="_blank" rel="noreferrer" class="bs">
+          Hablemos
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M13.5 2.5L7 9M13.5 2.5L9.5 13.5L7 9M13.5 2.5L2.5 6.5L7 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <div class="hr-v">
+      <div class="hr-iw">
+        <div class="hr-rg"></div>
+        <div class="hr-gl"></div>
+        <img class="hr-im" src="/perfil.png" alt="Sebastián Cuervo" loading="eager" />
+        <div class="hr-bd hr-bd-top">
+          <div class="bi bi-b">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" fill="#2563eb"/></svg>
+          </div>
+          UI/UX Design
+        </div>
+        <div class="hr-bd hr-bd-bottom">
+          <div class="bi bi-g">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M16 18l2-2-4-4 4-4-2-2-6 6 6 6z" fill="#16a34a"/><path d="M8 6l-2 2 4 4-4 4 2 2 6-6-6-6z" fill="#16a34a"/></svg>
+          </div>
+          Dev Web
+        </div>
       </div>
     </div>
   </div>

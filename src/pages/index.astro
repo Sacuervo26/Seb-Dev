@@ -3,6 +3,9 @@ import "../styles/global.css";
 import Layout from "../layouts/Layout.astro";
 import Navbar from "../components/Navbar.astro";
 import Hero from "../components/Hero.astro";
+import HomeServices from "../components/HomeServices.astro";
+import StatsBar from "../components/StatsBar.astro";
+import HomeCTA from "../components/HomeCTA.astro";
 import Footer from "../components/Footer.astro";
 ---
 
@@ -11,8 +14,11 @@ import Footer from "../components/Footer.astro";
   description="Landing principal de Seb/Dev. Arquitecto y desarrollador web enfocado en sitios modernos, claros y profesionales."
 >
   <Navbar currentPath="/" />
-  <main class="page-main">
+  <main>
     <Hero />
+    <HomeServices />
+    <StatsBar />
+    <HomeCTA />
   </main>
   <Footer />
 </Layout>

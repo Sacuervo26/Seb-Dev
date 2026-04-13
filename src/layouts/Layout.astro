@@ -14,40 +14,42 @@ const {
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={description} />
-    <meta name="theme-color" content="#f8fbff" />
+    <meta name="theme-color" content="#ffffff" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
     <ViewTransitions />
   </head>
-  <body class="font-sans">
-    <div class="page-shell">
-      <slot />
-      <FloatingWhatsApp />
-    </div>
+  <body>
+    <slot />
+    <FloatingWhatsApp />
 
     <script>
       function initReveal() {
-        const els = document.querySelectorAll(".reveal:not(.visible)");
+        const els = document.querySelectorAll(".ao:not(.v), .reveal:not(.visible)");
         if (!els.length) return;
 
         const observer = new IntersectionObserver(
           (entries) => {
             entries.forEach((entry) => {
               if (entry.isIntersecting) {
-                entry.target.classList.add("visible");
+                entry.target.classList.add(
+                  entry.target.classList.contains("ao") ? "v" : "visible"
+                );
                 observer.unobserve(entry.target);
               }
             });
           },
-          { threshold: 0.05, rootMargin: "20px 0px -40px 0px" }
+          { threshold: 0.12 }
         );
 
         els.forEach((el) => observer.observe(el));
       }
 
       function initCounters() {
-        const counters = document.querySelectorAll("[data-count]");
+        const counters = document.querySelectorAll("[data-target]");
         if (!counters.length) return;
 
         const observer = new IntersectionObserver(
@@ -55,20 +57,15 @@ const {
             entries.forEach((entry) => {
               if (!entry.isIntersecting) return;
               const el = entry.target;
-              const target = parseInt(el.dataset.count, 10);
+              const target = parseInt(el.dataset.target, 10);
               const suffix = el.dataset.suffix || "";
-              const duration = 1400;
+              const duration = 2000;
               const start = performance.now();
 
-              // Animate the bar if present
-              const bar = el.closest(".counter-item")?.querySelector(".counter-bar");
-              if (bar) bar.classList.add("animate");
-
               function tick(now) {
-                const elapsed = now - start;
-                const progress = Math.min(elapsed / duration, 1);
+                const progress = Math.min((now - start) / duration, 1);
                 const eased = 1 - Math.pow(1 - progress, 3);
-                el.textContent = Math.round(target * eased) + suffix;
+                el.textContent = Math.floor(eased * target) + suffix;
                 if (progress < 1) requestAnimationFrame(tick);
               }
               requestAnimationFrame(tick);
@@ -82,7 +79,7 @@ const {
       }
 
       function initNavScroll() {
-        const nav = document.querySelector(".premium-header");
+        const nav = document.getElementById("nv");
         if (!nav) return;
         function check() {
           nav.classList.toggle("scrolled", window.scrollY > 50);
@@ -98,7 +95,15 @@ const {
       }
 
       document.addEventListener("DOMContentLoaded", initAll);
-      document.addEventListener("astro:after-swap", initAll);
+      document.addEventListener("astro:after-swap", () => {
+        initAll();
+        // Close mobile menu on navigation
+        const hm = document.getElementById("hm");
+        const mo = document.getElementById("mo");
+        if (hm) hm.classList.remove("open");
+        if (mo) mo.classList.remove("open");
+        document.body.style.overflow = "";
+      });
       if (document.readyState !== "loading") initAll();
     </script>
   </body>

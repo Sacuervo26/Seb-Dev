@@ -1,17 +1,16 @@
 ---
-const serviceLabels = ["Diseño web", "Desarrollo web", "UI/UX", "Acompañamiento"];
-
 const plans = [
   {
+    color: "c1",
     tier: "Emprendedor",
-    badge: "Más elegido",
+    badge: true,
+    featured: true,
     price: "$250.000",
     description: "Página web estática, ideal para emprendedores que quieren tener presencia en internet de forma rápida y profesional.",
     cta: "Empezar",
     infoLabel: "Antes de empezar",
     infoHref: "/antes-de-empezar",
     ctaHref: "https://wa.me/573005720253",
-    recommended: true,
     features: [
       "Página estática (1 a 3 páginas)",
       "Diseño moderno, limpio y responsive",
@@ -27,6 +26,7 @@ const plans = [
     renewalNote: "*El primer año de hosting está incluido en este precio, después el hosting se renueva en 99.000+IVA por año.",
   },
   {
+    color: "c2",
     tier: "Profesional",
     price: "$400.000",
     description: "Sitio web dinámico con animaciones y transiciones, pensado para negocios que buscan impactar y diferenciarse.",
@@ -47,12 +47,13 @@ const plans = [
       "4 revisiones incluidas",
       "Entrega en 8–10 días",
     ],
-    renewalNote: "*El primer año de hosting y dominio está incluido en este precio, después el hosting y dominio se renueva en 149.000+IVA por año.",
+    renewalNote: "*El primer año de hosting y dominio está incluido en este precio, después se renueva en 149.000+IVA por año.",
   },
   {
+    color: "c3",
     tier: "Rediseño",
-    variant: "redesign",
-    price: "Desde $390.000",
+    pricePrefix: "Desde",
+    price: "$390.000",
     description: "Optimización y rediseño de tu sitio web actual para mejorar su imagen, estructura y resultados.",
     cta: "Evaluar mi página",
     infoLabel: "Antes de rediseñar",
@@ -68,68 +69,63 @@ const plans = [
       "3 revisiones incluidas",
       "Entrega según evaluación",
     ],
+    renewalNote: "*Hosting y dominio según plan. Se brinda asesoría para su adquisición.",
   },
 ];
+
+const checkSvg = `<svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+const starSvg = `<svg viewBox="0 0 24 24" fill="none" width="12" height="12"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" fill="currentColor"/></svg>`;
 ---
 
-<section class="page-section page-section-tight px-4 pb-8 pt-0 sm:px-6 sm:pb-10">
-  <div class="site-container">
-    <div class="service-pill-grid mb-5 mt-1.5 sm:mb-6 sm:mt-2 sm:gap-4 reveal">
-      {serviceLabels.map((label) => (
-        <span class="inline-flex items-center justify-center rounded-full border border-sky-200/80 bg-white/70 px-4 py-2 text-sm font-medium text-slate-700 shadow-[0_8px_20px_rgba(148,163,184,0.08)] transition duration-200 hover:border-sky-300 hover:bg-sky-50/80 hover:text-sky-700">
-          {label}
-        </span>
-      ))}
-    </div>
+<header class="svc-header">
+  <p class="svc-label">Servicios</p>
+  <h1 class="svc-title">
+    Planes pensados para llevar tu<br />
+    <span class="hl">presencia digital</span> al siguiente nivel
+  </h1>
+</header>
 
-    <div class="pricing-grid">
-      {plans.map((plan, i) => (
-        <article class:list={["pricing-card", "reveal", `reveal-d${i + 1}`, plan.recommended && "is-featured is-recommended", plan.variant === "redesign" && "is-redesign"]}>
-          {plan.badge && <span class="pricing-recommended-badge">{plan.badge}</span>}
+<div class="svc-tags">
+  <span class="svc-tag">Diseño web</span>
+  <span class="svc-tag">Desarrollo web</span>
+  <span class="svc-tag">UI/UX</span>
+  <span class="svc-tag">Acompañamiento</span>
+</div>
 
-          <div class="pricing-card-top">
-            <p class="pricing-tier">{plan.tier}</p>
-            <div class="mt-3 flex items-baseline gap-1.5">
-              <h2 class="font-display text-[1.5rem] font-semibold tracking-[-0.04em] text-slate-950 sm:text-[1.7rem]">
-                {plan.price}
-              </h2>
-              {plan.priceNote && (
-                <span class="text-sm font-medium text-slate-400">{plan.priceNote}</span>
-              )}
+<section class="svc-pricing">
+  <div class="svc-grid stg">
+    {plans.map((plan) => (
+      <div class:list={["svc-card", plan.color, "reveal", plan.featured && "featured"]}>
+        <div class="svc-accent"></div>
+        <div class="svc-body">
+          {plan.badge && (
+            <div class="svc-badge">
+              <Fragment set:html={starSvg} />
+              Más elegido
             </div>
-
-            <p class="pricing-copy mt-4">{plan.description}</p>
+          )}
+          <p class="svc-plan">{plan.tier}</p>
+          <div class="svc-price">
+            {plan.pricePrefix && <span class="svc-prefix">{plan.pricePrefix}</span>}
+            {plan.price}
           </div>
-
-          <ul class="pricing-features mt-5">
-            {plan.features.map((feature) => (
+          <p class="svc-desc">{plan.description}</p>
+          <div class="svc-divider"></div>
+          <ul class="svc-features">
+            {plan.features.map((f) => (
               <li>
-                <span class="pricing-check" aria-hidden="true">✓</span>
-                <span>{feature}</span>
+                <span class="svc-check"><Fragment set:html={checkSvg} /></span>
+                {f}
               </li>
             ))}
           </ul>
-
-          <div class="pricing-actions mt-7">
-            <a href={plan.infoHref} class:list={["pricing-cta", "is-info"]}>
-              {plan.infoLabel}
-            </a>
-            <a href={plan.ctaHref} target="_blank" rel="noreferrer" class:list={["pricing-cta", "is-primary"]}>
-              {plan.cta}
-            </a>
+          <div class="svc-buttons">
+            <a href={plan.infoHref} class="svc-btn-outline">{plan.infoLabel}</a>
+            <a href={plan.ctaHref} target="_blank" rel="noreferrer" class="svc-btn-solid">{plan.cta}</a>
           </div>
-
-          {plan.renewalNote && (
-            <p class="mt-4 text-[0.72rem] leading-5 text-slate-400 italic">
-              {plan.renewalNote}
-            </p>
-          )}
-        </article>
-      ))}
-    </div>
-
-    <p class="pricing-note mx-auto mt-5 max-w-3xl text-center text-sm text-slate-500">
-      *Hosting y dominio según plan. Se brinda asesoría para su adquisición.
-    </p>
+          {plan.renewalNote && <p class="svc-note">{plan.renewalNote}</p>}
+        </div>
+      </div>
+    ))}
   </div>
 </section>

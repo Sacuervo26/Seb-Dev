@@ -10,80 +10,101 @@ const links = [
 ];
 ---
 
-<header class="fixed inset-x-0 top-0 z-50 px-3 pt-3 sm:px-4 md:px-6 lg:px-8">
-  <nav class="site-container premium-header rounded-[1.35rem] px-4 py-3 sm:px-5">
-    <div class="flex items-center justify-between gap-4">
-      <a href="/" class="flex min-w-0 items-center">
-        <img src="/Logo.png" alt="sebweb.co" class="premium-logo" loading="eager" />
+<nav class="nv" id="nv">
+  <a href="/" class="nv-logo">
+    <img src="/Logo.png" alt="sebweb.co" />
+  </a>
+
+  <ul class="nl">
+    {links.map((link) => (
+      <li>
+        <a
+          href={link.href}
+          class:list={[currentPath === link.href && "on"]}
+          aria-current={currentPath === link.href ? "page" : undefined}
+        >
+          {link.label}
+        </a>
+      </li>
+    ))}
+  </ul>
+
+  <a href="https://wa.me/573005720253" target="_blank" rel="noreferrer" class="nv-cta nv-cta-desktop">Hablemos</a>
+
+  <button class="hm" id="hm" aria-label="Menú">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+</nav>
+
+<!-- Backdrop -->
+<div class="mo-backdrop" id="moBackdrop"></div>
+
+<!-- Side panel menu -->
+<div class="mo" id="mo">
+  <div class="mo-header">
+    <a href="/" class="nv-logo">
+      <img src="/Logo.png" alt="sebweb.co" />
+    </a>
+    <button class="mo-close" id="moClose" aria-label="Cerrar menú">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+        <path d="M18 6L6 18"/><path d="M6 6l12 12"/>
+      </svg>
+    </button>
+  </div>
+
+  <div class="mo-links">
+    {links.map((link) => (
+      <a
+        href={link.href}
+        class:list={["mo-link", currentPath === link.href && "active"]}
+      >
+        {link.label}
       </a>
+    ))}
+  </div>
 
-      <div class="hidden items-center gap-7 lg:flex">
-        {links.map((link) => (
-          <a
-            href={link.href}
-            class:list={["nav-link text-sm font-medium", currentPath === link.href && "is-active"]}
-            aria-current={currentPath === link.href ? "page" : undefined}
-          >
-            {link.label}
-          </a>
-        ))}
-      </div>
-
-      <div class="hidden lg:flex">
-        <a href="https://wa.me/573005720253" target="_blank" rel="noreferrer" class="button-primary px-5 py-3 text-sm">Hablemos</a>
-      </div>
-
-      <details class="mobile-nav relative lg:hidden">
-        <summary class="mobile-menu-trigger flex h-11 w-11 cursor-pointer list-none items-center justify-center rounded-2xl border border-slate-200 bg-white/88 text-slate-700 marker:content-none">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M4 7h16M4 12h16M4 17h16" />
-          </svg>
-        </summary>
-        <button type="button" class="mobile-nav-backdrop" aria-label="Cerrar menú"></button>
-        <div class="mobile-nav-panel card-quiet absolute right-0 mt-3 w-[min(16.5rem,calc(100vw-1rem))] rounded-[1.25rem] p-3 sm:w-[17.25rem]">
-          <div class="mb-3 flex items-center justify-between gap-3 px-1">
-            <img src="/Logo.png" alt="sebweb.co" class="premium-logo premium-logo-mobile" />
-            <p class="text-[0.68rem] font-semibold uppercase tracking-[0.22em] text-slate-400">Menú</p>
-          </div>
-
-          <div class="flex flex-col gap-1">
-            {links.map((link) => (
-              <a
-                href={link.href}
-                class:list={[
-                  "mobile-nav-link rounded-2xl px-4 py-2.5 text-sm font-medium text-slate-600 transition hover:bg-sky-50 hover:text-slate-900",
-                  currentPath === link.href && "is-active",
-                ]}
-                aria-current={currentPath === link.href ? "page" : undefined}
-              >
-                {link.label}
-              </a>
-            ))}
-          </div>
-
-          <a href="https://wa.me/573005720253" target="_blank" rel="noreferrer" class="button-primary mt-2.5 w-full text-sm">Hablemos</a>
-        </div>
-      </details>
-    </div>
-  </nav>
-</header>
+  <div class="mo-bottom">
+    <a href="https://wa.me/573005720253" target="_blank" rel="noreferrer" class="mo-cta-btn">Hablemos</a>
+  </div>
+</div>
 
 <script is:inline>
   (() => {
-    const menus = Array.from(document.querySelectorAll(".mobile-nav"));
-    menus.forEach((menu) => {
-      const backdrop = menu.querySelector(".mobile-nav-backdrop");
-      const links = Array.from(menu.querySelectorAll(".mobile-nav-link"));
+    const hm = document.getElementById("hm");
+    const mo = document.getElementById("mo");
+    const moClose = document.getElementById("moClose");
+    const backdrop = document.getElementById("moBackdrop");
+    if (!hm || !mo) return;
 
-      backdrop?.addEventListener("click", () => {
-        menu.removeAttribute("open");
-      });
+    function openMenu() {
+      hm.classList.add("open");
+      mo.classList.add("open");
+      if (backdrop) backdrop.classList.add("open");
+      document.body.style.overflow = "hidden";
+    }
 
-      links.forEach((link) => {
-        link.addEventListener("click", () => {
-          menu.removeAttribute("open");
-        });
-      });
+    function closeMenu() {
+      hm.classList.remove("open");
+      mo.classList.remove("open");
+      if (backdrop) backdrop.classList.remove("open");
+      document.body.style.overflow = "";
+    }
+
+    hm.addEventListener("click", () => {
+      mo.classList.contains("open") ? closeMenu() : openMenu();
+    });
+
+    if (moClose) moClose.addEventListener("click", closeMenu);
+    if (backdrop) backdrop.addEventListener("click", closeMenu);
+
+    mo.querySelectorAll("a").forEach((a) => {
+      a.addEventListener("click", closeMenu);
+    });
+
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && mo.classList.contains("open")) closeMenu();
     });
   })();
 </script>
