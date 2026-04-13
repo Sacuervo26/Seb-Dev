@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://seb-dev-nu.vercel.app/sitemap-index.xml

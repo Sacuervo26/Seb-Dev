@@ -2,10 +2,15 @@
 import { ViewTransitions } from "astro:transitions";
 import FloatingWhatsApp from "../components/FloatingWhatsApp.astro";
 
+const siteUrl = "https://seb-dev-nu.vercel.app";
+
 const {
-  title = "Seb/Dev | Diseño y desarrollo web moderno",
+  title = "Seb/Web | Diseño y desarrollo web moderno",
   description = "Diseño y desarrollo de sitios web modernos con enfoque visual, estructura clara y experiencia cuidada.",
+  ogImage = "/perfil.png",
 } = Astro.props;
+
+const canonicalUrl = new URL(Astro.url.pathname, siteUrl).href;
 ---
 
 <!doctype html>
@@ -14,13 +19,89 @@ const {
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={description} />
+    <meta name="robots" content="index, follow" />
+    <meta name="author" content="Sebastián Cuervo" />
     <meta name="theme-color" content="#ffffff" />
+
+    <!-- Canonical -->
+    <link rel="canonical" href={canonicalUrl} />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:image" content={`${siteUrl}${ogImage}`} />
+    <meta property="og:locale" content="es_CO" />
+    <meta property="og:site_name" content="Seb/Web" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={`${siteUrl}${ogImage}`} />
+
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <!-- Favicon -->
     <link rel="icon" type="image/png" href="/favicon.png" />
+
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
     <ViewTransitions />
+
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "ProfessionalService",
+      "name": "Seb/Web - Sebastián Cuervo",
+      "description": "Diseño y desarrollo de sitios web modernos, claros y profesionales para marcas y negocios.",
+      "url": siteUrl,
+      "logo": `${siteUrl}/Logo.png`,
+      "image": `${siteUrl}/perfil.png`,
+      "telephone": "+573005720253",
+      "email": "sacuervo.dev@gmail.com",
+      "address": {
+        "@type": "PostalAddress",
+        "addressCountry": "CO"
+      },
+      "priceRange": "$250.000 - $390.000 COP",
+      "sameAs": [],
+      "founder": {
+        "@type": "Person",
+        "name": "Sebastián Cuervo",
+        "jobTitle": "Arquitecto y Desarrollador Web",
+        "image": `${siteUrl}/perfil.png`
+      },
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Servicios de diseño web",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Plan Emprendedor",
+              "description": "Página web estática de 1 a 3 páginas"
+            },
+            "price": "250000",
+            "priceCurrency": "COP"
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Plan Profesional",
+              "description": "Sitio web dinámico con animaciones hasta 5 páginas"
+            },
+            "price": "390000",
+            "priceCurrency": "COP"
+          }
+        ]
+      }
+    })} />
   </head>
   <body>
     <slot />
@@ -97,7 +178,6 @@ const {
       document.addEventListener("DOMContentLoaded", initAll);
       document.addEventListener("astro:after-swap", () => {
         initAll();
-        // Close mobile menu on navigation
         const hm = document.getElementById("hm");
         const fm = document.getElementById("fm");
         const fmBackdrop = document.getElementById("fmBackdrop");
