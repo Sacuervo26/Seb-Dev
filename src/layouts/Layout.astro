@@ -99,9 +99,11 @@ const {
         initAll();
         // Close mobile menu on navigation
         const hm = document.getElementById("hm");
-        const mo = document.getElementById("mo");
+        const fm = document.getElementById("fm");
+        const fmBackdrop = document.getElementById("fmBackdrop");
         if (hm) hm.classList.remove("open");
-        if (mo) mo.classList.remove("open");
+        if (fm) fm.classList.remove("open");
+        if (fmBackdrop) fmBackdrop.classList.remove("open");
         document.body.style.overflow = "";
       });
       if (document.readyState !== "loading") initAll();

@@ -1,0 +1,119 @@
+---
+const categories = [
+  {
+    label: "Antes de empezar",
+    questions: [
+      {
+        q: "¿Qué necesito para empezar mi página web?",
+        a: "Solo necesitas tener claro qué hace tu negocio, a quién le vendes y tener tu logo (si lo tienes). Yo me encargo del resto: estructura, diseño, desarrollo y publicación.",
+      },
+      {
+        q: "¿Cuánto tiempo tarda en estar lista mi página?",
+        a: "El plan Emprendedor se entrega en 5 días hábiles y el Profesional en 8 a 10 días, una vez tengas aprobado el diseño y me envíes el contenido.",
+      },
+      {
+        q: "¿Puedo ver avances antes de que esté terminada?",
+        a: "Sí. Te muestro avances durante el proceso para que apruebes el diseño antes de publicar. Cada plan incluye revisiones para que puedas pedir ajustes.",
+      },
+    ],
+  },
+  {
+    label: "Hosting, dominio y pagos",
+    questions: [
+      {
+        q: "¿Qué es el dominio y qué es el hosting?",
+        a: 'El <strong>dominio</strong> es la dirección de tu página (ejemplo: tunegocio.com). El <strong>hosting</strong> es el espacio en internet donde vive tu sitio. Piénsalo así: el dominio es la dirección de tu casa y el hosting es el terreno donde está construida.',
+      },
+      {
+        q: "¿El dominio y hosting están incluidos en el precio?",
+        a: 'En el plan <strong>Emprendedor</strong> el hosting del primer año está incluido (el dominio no). En el plan <strong>Profesional</strong>, tanto el hosting como el dominio del primer año están incluidos.',
+      },
+      {
+        q: "¿Cuánto cuesta renovar después del primer año?",
+        a: 'El plan Emprendedor se renueva en <strong>$99.000+IVA/año</strong> (hosting). El plan Profesional se renueva en <strong>$149.000+IVA/año</strong> (hosting + dominio). Yo te aviso antes del vencimiento para que no se te pase.',
+      },
+      {
+        q: "¿El dominio y el hosting quedan a mi nombre?",
+        a: "Sí. Todo queda registrado a tu nombre. Tú eres el dueño de tu dominio y tu hosting. Yo solo administro el desarrollo.",
+      },
+    ],
+  },
+  {
+    label: "Después de la entrega",
+    questions: [
+      {
+        q: "¿Mi página se va a ver bien en celulares?",
+        a: "Sí. Todas las páginas que diseño son 100% responsive — se adaptan automáticamente a celulares, tablets y computadores.",
+      },
+      {
+        q: "¿Puedo hacer cambios después de la entrega?",
+        a: "Los cambios dentro de las revisiones incluidas en tu plan son sin costo adicional. Después de la entrega, cambios menores se pueden cotizar aparte.",
+      },
+      {
+        q: "¿Qué pasa si necesito más páginas o funciones en el futuro?",
+        a: "Podemos escalar tu sitio en cualquier momento. Me escribes y evaluamos qué necesitas — ya sea agregar páginas, secciones o funcionalidades nuevas.",
+      },
+    ],
+  },
+];
+
+const plusSvg = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>`;
+---
+
+<section class="faq-section">
+  <div class="faq-container">
+    <p class="faq-label ao">Preguntas frecuentes</p>
+    <h2 class="faq-title ao">¿Tienes dudas? Te <span class="hl">ayudamos</span></h2>
+    <p class="faq-subtitle ao">Las respuestas a las preguntas más comunes sobre nuestros servicios de diseño y desarrollo web.</p>
+
+    {categories.map((cat, ci) => (
+      <>
+        <div class="faq-category ao">{cat.label}</div>
+        {cat.questions.map((item) => (
+          <div class="faq-item ao">
+            <button class="faq-question">
+              {item.q}
+              <span class="faq-icon"><Fragment set:html={plusSvg} /></span>
+            </button>
+            <div class="faq-answer">
+              <div class="faq-answer-inner" set:html={item.a} />
+            </div>
+          </div>
+        ))}
+      </>
+    ))}
+  </div>
+</section>
+
+<script is:inline>
+  function initFaq() {
+    document.querySelectorAll('.faq-question').forEach(function(btn) {
+      var newBtn = btn.cloneNode(true);
+      btn.parentNode.replaceChild(newBtn, btn);
+
+      newBtn.addEventListener('click', function() {
+        var item = newBtn.parentElement;
+        var answer = item.querySelector('.faq-answer');
+        var isOpen = item.classList.contains('open');
+
+        document.querySelectorAll('.faq-item.open').forEach(function(openItem) {
+          if (openItem !== item) {
+            openItem.classList.remove('open');
+            openItem.querySelector('.faq-answer').style.maxHeight = '0';
+          }
+        });
+
+        if (isOpen) {
+          item.classList.remove('open');
+          answer.style.maxHeight = '0';
+        } else {
+          item.classList.add('open');
+          answer.style.maxHeight = answer.scrollHeight + 'px';
+        }
+      });
+    });
+  }
+
+  initFaq();
+  document.addEventListener('astro:after-swap', initFaq);
+</script>

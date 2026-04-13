@@ -36,75 +36,70 @@ const links = [
     <span></span>
     <span></span>
   </button>
+
+  <!-- Floating card menu -->
+  <div class="fm" id="fm">
+    <div class="fm-header">
+      <a href="/" class="nv-logo">
+        <img src="/Logo.png" alt="sebweb.co" />
+      </a>
+      <span class="fm-label">MENÚ</span>
+    </div>
+
+    <div class="fm-links">
+      {links.map((link) => (
+        <a
+          href={link.href}
+          class:list={["fm-link", currentPath === link.href && "active"]}
+        >
+          {link.label}
+        </a>
+      ))}
+    </div>
+
+    <div class="fm-bottom">
+      <a href="https://wa.me/573005720253" target="_blank" rel="noreferrer" class="fm-cta">Hablemos</a>
+    </div>
+  </div>
 </nav>
 
-<!-- Backdrop -->
-<div class="mo-backdrop" id="moBackdrop"></div>
-
-<!-- Side panel menu -->
-<div class="mo" id="mo">
-  <div class="mo-header">
-    <a href="/" class="nv-logo">
-      <img src="/Logo.png" alt="sebweb.co" />
-    </a>
-    <button class="mo-close" id="moClose" aria-label="Cerrar menú">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
-        <path d="M18 6L6 18"/><path d="M6 6l12 12"/>
-      </svg>
-    </button>
-  </div>
-
-  <div class="mo-links">
-    {links.map((link) => (
-      <a
-        href={link.href}
-        class:list={["mo-link", currentPath === link.href && "active"]}
-      >
-        {link.label}
-      </a>
-    ))}
-  </div>
-
-  <div class="mo-bottom">
-    <a href="https://wa.me/573005720253" target="_blank" rel="noreferrer" class="mo-cta-btn">Hablemos</a>
-  </div>
-</div>
+<div class="fm-backdrop" id="fmBackdrop"></div>
 
 <script is:inline>
-  (() => {
-    const hm = document.getElementById("hm");
-    const mo = document.getElementById("mo");
-    const moClose = document.getElementById("moClose");
-    const backdrop = document.getElementById("moBackdrop");
-    if (!hm || !mo) return;
+  function initFm() {
+    var hm = document.getElementById("hm");
+    var fm = document.getElementById("fm");
+    var bd = document.getElementById("fmBackdrop");
+    if (!hm || !fm) return;
 
-    function openMenu() {
-      hm.classList.add("open");
-      mo.classList.add("open");
-      if (backdrop) backdrop.classList.add("open");
-      document.body.style.overflow = "hidden";
-    }
+    // Clone to remove old listeners
+    var newHm = hm.cloneNode(true);
+    hm.parentNode.replaceChild(newHm, hm);
 
-    function closeMenu() {
-      hm.classList.remove("open");
-      mo.classList.remove("open");
-      if (backdrop) backdrop.classList.remove("open");
+    var newBd = bd ? bd.cloneNode(true) : null;
+    if (bd && newBd) bd.parentNode.replaceChild(newBd, bd);
+
+    function close() {
+      newHm.classList.remove("open");
+      fm.classList.remove("open");
+      if (newBd) newBd.classList.remove("open");
       document.body.style.overflow = "";
     }
 
-    hm.addEventListener("click", () => {
-      mo.classList.contains("open") ? closeMenu() : openMenu();
+    newHm.addEventListener("click", function() {
+      var isOpen = fm.classList.contains("open");
+      if (isOpen) { close(); }
+      else {
+        newHm.classList.add("open");
+        fm.classList.add("open");
+        if (newBd) newBd.classList.add("open");
+      }
     });
 
-    if (moClose) moClose.addEventListener("click", closeMenu);
-    if (backdrop) backdrop.addEventListener("click", closeMenu);
+    if (newBd) newBd.addEventListener("click", close);
+    fm.querySelectorAll("a").forEach(function(a) { a.addEventListener("click", close); });
+  }
 
-    mo.querySelectorAll("a").forEach((a) => {
-      a.addEventListener("click", closeMenu);
-    });
-
-    document.addEventListener("keydown", (e) => {
-      if (e.key === "Escape" && mo.classList.contains("open")) closeMenu();
-    });
-  })();
+  initFm();
+  document.addEventListener("astro:after-swap", initFm);
 </script>
