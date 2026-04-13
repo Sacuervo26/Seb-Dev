@@ -3,96 +3,78 @@ const serviceLabels = ["Diseño web", "Desarrollo web", "UI/UX", "Acompañamient
 
 const plans = [
   {
-    tier: "BÁSICO",
+    tier: "Emprendedor",
     badge: "Más elegido",
-    price: "$490.000",
-    description: "Sitio web profesional de 1 a 3 páginas, ideal para emprendedores y negocios que quieren empezar a vender en internet.",
-    delivery: "Entrega en 5 días",
-    revisions: "2 revisiones incluidas",
+    price: "$250.000",
+    description: "Página web estática, ideal para emprendedores que quieren tener presencia en internet de forma rápida y profesional.",
     cta: "Empezar",
     infoLabel: "Antes de empezar",
     infoHref: "/antes-de-empezar",
     ctaHref: "https://wa.me/573005720253",
     recommended: true,
     features: [
-      "1 a 3 páginas",
+      "Página estática (1 a 3 páginas)",
       "Diseño moderno, limpio y responsive",
       "Botón directo a WhatsApp",
-      "Estructura clara e intuitiva para guiar al usuario",
+      "Estructura clara e intuitiva",
       "SEO optimizado para Google",
       "Formulario de contacto",
+      "Hosting incluido 1 año",
+      "Dominio no incluido",
       "2 revisiones incluidas",
+      "Entrega en 5 días",
     ],
+    renewalNote: "*El primer año de hosting está incluido en este precio, después el hosting se renueva en 99.000+IVA por año.",
   },
   {
-    tier: "ESTÁNDAR",
-    price: "$990.000",
-    description: "Sitio web profesional de más de 4 páginas, ideal para negocios que quieren mayor presencia y posicionamiento online.",
-    delivery: "Entrega en 8 a 10 días",
-    revisions: "4 revisiones incluidas",
+    tier: "Profesional",
+    price: "$400.000",
+    description: "Sitio web dinámico con animaciones y transiciones, pensado para negocios que buscan impactar y diferenciarse.",
     cta: "Empezar",
     infoLabel: "Antes de empezar",
     infoHref: "/antes-de-empezar",
     ctaHref: "https://wa.me/573005720253",
     features: [
-      "4+ páginas",
+      "Página dinámica con animaciones (hasta 5 páginas)",
+      "Transiciones y efectos de scroll",
       "Diseño moderno, limpio y responsive",
       "Botón directo a WhatsApp",
-      "Estructura clara e intuitiva para guiar al usuario",
+      "Estructura clara e intuitiva",
       "SEO avanzado para Google",
       "Formularios de contacto",
+      "Hosting incluido 1 año",
+      "Dominio incluido 1 año",
       "4 revisiones incluidas",
+      "Entrega en 8–10 días",
     ],
-  },
-  {
-    tier: "PREMIUM",
-    price: "$2.490.000",
-    description: "Sitio web tipo ecommerce con sistema de pagos integrado, ideal para vender productos o servicios directamente desde tu página.",
-    delivery: "Entrega en 12 a 15 días",
-    revisions: "6 revisiones incluidas",
-    cta: "Empezar",
-    infoLabel: "Antes de empezar",
-    infoHref: "/antes-de-empezar",
-    ctaHref: "https://wa.me/573005720253",
-    features: [
-      "Sitio web completo tipo tienda online (ecommerce)",
-      "Diseño moderno, profesional y responsive",
-      "Integración de pasarela de pagos (Wompi o Mercado Pago)",
-      "Métodos de pago: tarjeta, PSE, Nequi, entre otros",
-      "Configuración de productos o servicios",
-      "Flujo de compra completo (selección → pago → confirmación)",
-      "SEO avanzado para Google",
-      "6 revisiones incluidas",
-    ],
+    renewalNote: "*El primer año de hosting y dominio está incluido en este precio, después el hosting y dominio se renueva en 149.000+IVA por año.",
   },
   {
     tier: "Rediseño",
     variant: "redesign",
     price: "Desde $390.000",
     description: "Optimización y rediseño de tu sitio web actual para mejorar su imagen, estructura y resultados.",
-    delivery: "Según evaluación",
-    revisions: "3 revisiones incluidas",
     cta: "Evaluar mi página",
     infoLabel: "Antes de rediseñar",
     infoHref: "/antes-de-redisenar",
     ctaHref: "https://wa.me/573005720253",
     features: [
       "Rediseño visual moderno y profesional",
-      "Mejora de estructura y organización del contenido",
+      "Mejora de estructura y contenido",
       "Optimización UX/UI",
       "Diseño responsive",
-      "Optimización básica de velocidad",
       "SEO avanzado",
       "Botón de contacto (WhatsApp, etc.)",
       "3 revisiones incluidas",
+      "Entrega según evaluación",
     ],
   },
 ];
 ---
 
-<section class="page-section page-section-tight px-3 pb-8 pt-0 sm:px-4 sm:pb-10 md:px-6 lg:px-8">
+<section class="page-section page-section-tight px-4 pb-8 pt-0 sm:px-6 sm:pb-10">
   <div class="site-container">
-    <div class="service-pill-grid mb-5 mt-1.5 sm:mb-6 sm:mt-2 sm:gap-4">
+    <div class="service-pill-grid mb-5 mt-1.5 sm:mb-6 sm:mt-2 sm:gap-4 reveal">
       {serviceLabels.map((label) => (
         <span class="inline-flex items-center justify-center rounded-full border border-sky-200/80 bg-white/70 px-4 py-2 text-sm font-medium text-slate-700 shadow-[0_8px_20px_rgba(148,163,184,0.08)] transition duration-200 hover:border-sky-300 hover:bg-sky-50/80 hover:text-sky-700">
           {label}
@@ -101,30 +83,25 @@ const plans = [
     </div>
 
     <div class="pricing-grid">
-      {plans.map((plan) => (
-        <article class:list={["pricing-card", plan.recommended && "is-featured is-recommended", plan.variant === "redesign" && "is-redesign"]}>
+      {plans.map((plan, i) => (
+        <article class:list={["pricing-card", "reveal", `reveal-d${i + 1}`, plan.recommended && "is-featured is-recommended", plan.variant === "redesign" && "is-redesign"]}>
           {plan.badge && <span class="pricing-recommended-badge">{plan.badge}</span>}
 
           <div class="pricing-card-top">
-            <div class="flex flex-col items-start gap-3 sm:flex-row sm:items-start sm:justify-between">
-              <div>
-                <p class="pricing-tier">{plan.tier}</p>
-                <h2 class="mt-3 font-display text-[1.5rem] font-semibold tracking-[-0.04em] text-slate-950 sm:text-[1.7rem]">
-                  {plan.price}
-                </h2>
-              </div>
-              <span class="pricing-badge">{plan.delivery}</span>
+            <p class="pricing-tier">{plan.tier}</p>
+            <div class="mt-3 flex items-baseline gap-1.5">
+              <h2 class="font-display text-[1.5rem] font-semibold tracking-[-0.04em] text-slate-950 sm:text-[1.7rem]">
+                {plan.price}
+              </h2>
+              {plan.priceNote && (
+                <span class="text-sm font-medium text-slate-400">{plan.priceNote}</span>
+              )}
             </div>
 
             <p class="pricing-copy mt-4">{plan.description}</p>
-
-            <div class="pricing-meta mt-5">
-              <span>{plan.delivery}</span>
-              <span>{plan.revisions}</span>
-            </div>
           </div>
 
-          <ul class="pricing-features mt-6">
+          <ul class="pricing-features mt-5">
             {plan.features.map((feature) => (
               <li>
                 <span class="pricing-check" aria-hidden="true">✓</span>
@@ -141,12 +118,18 @@ const plans = [
               {plan.cta}
             </a>
           </div>
+
+          {plan.renewalNote && (
+            <p class="mt-4 text-[0.72rem] leading-5 text-slate-400 italic">
+              {plan.renewalNote}
+            </p>
+          )}
         </article>
       ))}
     </div>
 
     <p class="pricing-note mx-auto mt-5 max-w-3xl text-center text-sm text-slate-500">
-      *Dominio y hosting no incluidos. Se brinda asesoría para su adquisición.
+      *Hosting y dominio según plan. Se brinda asesoría para su adquisición.
     </p>
   </div>
 </section>

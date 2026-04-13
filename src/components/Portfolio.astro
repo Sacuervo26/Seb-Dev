@@ -22,8 +22,8 @@ const projects = [
 <section class="page-section page-section-projects px-3 pb-10 sm:px-6">
   <div class="site-container">
     <div class="grid gap-6 md:grid-cols-2">
-      {projects.map((project) => (
-        <a href={project.href} target="_blank" rel="noreferrer" class="project-link">
+      {projects.map((project, i) => (
+        <a href={project.href} target="_blank" rel="noreferrer" class:list={["project-link", "reveal-scale", "reveal", i === 0 ? "reveal-d1" : "reveal-d3"]}>
           <article class="project-card overflow-hidden rounded-[1.8rem]">
             <div class="project-media relative overflow-hidden bg-slate-50">
               <img

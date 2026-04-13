@@ -7,9 +7,13 @@ const heroTags = [
 ];
 ---
 
-<section class="screen-section hero-section px-3 sm:px-6">
-  <div class="site-container">
-    <div class="hero-stage">
+<section class="screen-section hero-section px-3 sm:px-6 relative overflow-hidden">
+  <!-- Decorative floating blobs -->
+  <div class="absolute -right-20 top-16 h-72 w-72 rounded-full bg-sky-200/30 blur-3xl floating-slow" aria-hidden="true"></div>
+  <div class="absolute -left-16 bottom-24 h-56 w-56 rounded-full bg-sky-300/20 blur-3xl floating" aria-hidden="true"></div>
+
+  <div class="site-container relative z-10">
+    <div class="hero-stage hero-entrance-1">
       <div class="hero-portrait-shell">
         <img
           src="/perfil.png"
@@ -20,7 +24,7 @@ const heroTags = [
       </div>
     </div>
 
-    <div class="hero-tags-grid" aria-label="Servicios destacados">
+    <div class="hero-tags-grid hero-entrance-2" aria-label="Servicios destacados">
       {heroTags.map((tag) => (
         <div class="hero-label">
           <span class="hero-dot"></span>
@@ -30,15 +34,15 @@ const heroTags = [
     </div>
 
     <div class="mx-auto mt-5 max-w-[38rem] text-center sm:mt-6">
-      <span class="eyebrow justify-center">Arquitecto y desarrollador web</span>
-      <h1 class="page-title mt-4">
+      <span class="eyebrow justify-center hero-entrance-3">Arquitecto y desarrollador web</span>
+      <h1 class="page-title mt-4 hero-entrance-3">
         Diseño experiencias digitales claras, modernas y profesionales para marcas y negocios.
       </h1>
-      <p class="lead mx-auto mt-4">
+      <p class="lead mx-auto mt-4 hero-entrance-3">
         Combino estructura, criterio visual y desarrollo web para crear sitios limpios, bien pensados y fáciles de recorrer.
       </p>
 
-      <div class="mt-6 flex flex-col items-center justify-center gap-3 sm:flex-row">
+      <div class="mt-6 flex flex-col items-center justify-center gap-3 sm:flex-row hero-entrance-4">
         <a href="/servicios" class="button-primary w-full max-w-sm text-sm sm:w-auto sm:max-w-none sm:text-base">Servicios</a>
         <a href="https://wa.me/573005720253" target="_blank" rel="noreferrer" class="button-secondary w-full max-w-sm text-sm sm:w-auto sm:max-w-none sm:text-base">Hablemos</a>
       </div>

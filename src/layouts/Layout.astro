@@ -1,4 +1,5 @@
 ---
+import { ViewTransitions } from "astro:transitions";
 import FloatingWhatsApp from "../components/FloatingWhatsApp.astro";
 
 const {
@@ -17,11 +18,88 @@ const {
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
+    <ViewTransitions />
   </head>
   <body class="font-sans">
     <div class="page-shell">
       <slot />
       <FloatingWhatsApp />
     </div>
+
+    <script>
+      function initReveal() {
+        const els = document.querySelectorAll(".reveal:not(.visible)");
+        if (!els.length) return;
+
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("visible");
+                observer.unobserve(entry.target);
+              }
+            });
+          },
+          { threshold: 0.05, rootMargin: "20px 0px -40px 0px" }
+        );
+
+        els.forEach((el) => observer.observe(el));
+      }
+
+      function initCounters() {
+        const counters = document.querySelectorAll("[data-count]");
+        if (!counters.length) return;
+
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (!entry.isIntersecting) return;
+              const el = entry.target;
+              const target = parseInt(el.dataset.count, 10);
+              const suffix = el.dataset.suffix || "";
+              const duration = 1400;
+              const start = performance.now();
+
+              // Animate the bar if present
+              const bar = el.closest(".counter-item")?.querySelector(".counter-bar");
+              if (bar) bar.classList.add("animate");
+
+              function tick(now) {
+                const elapsed = now - start;
+                const progress = Math.min(elapsed / duration, 1);
+                const eased = 1 - Math.pow(1 - progress, 3);
+                el.textContent = Math.round(target * eased) + suffix;
+                if (progress < 1) requestAnimationFrame(tick);
+              }
+              requestAnimationFrame(tick);
+              observer.unobserve(el);
+            });
+          },
+          { threshold: 0.3 }
+        );
+
+        counters.forEach((el) => observer.observe(el));
+      }
+
+      function initNavScroll() {
+        const nav = document.querySelector(".premium-header");
+        if (!nav) return;
+        function check() {
+          nav.classList.toggle("scrolled", window.scrollY > 50);
+        }
+        window.addEventListener("scroll", check, { passive: true });
+        check();
+      }
+
+      function initAll() {
+        initReveal();
+        initCounters();
+        initNavScroll();
+      }
+
+      document.addEventListener("DOMContentLoaded", initAll);
+      document.addEventListener("astro:after-swap", initAll);
+      if (document.readyState !== "loading") initAll();
+    </script>
   </body>
 </html>
