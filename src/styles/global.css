@@ -123,24 +123,31 @@ body {
 
 .nv {
   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
+  top: 16px;
+  left: 16px;
+  right: 16px;
   z-index: 1000;
-  padding: 18px 40px;
+  padding: 12px 28px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   transition: all 0.4s var(--e);
-  background: transparent;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(20px) saturate(1.3);
+  -webkit-backdrop-filter: blur(20px) saturate(1.3);
+  border: 1px solid rgba(226, 230, 240, 0.7);
+  border-radius: 24px;
+  box-shadow:
+    0 6px 24px rgba(15, 23, 42, 0.06),
+    0 2px 8px rgba(15, 23, 42, 0.03);
 }
 
 .nv.scrolled {
-  background: rgba(255, 255, 255, 0.92);
-  backdrop-filter: blur(20px) saturate(1.3);
-  padding: 14px 40px;
-  border-bottom: 1px solid var(--brd);
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+  background: rgba(255, 255, 255, 0.95);
+  padding: 10px 28px;
+  box-shadow:
+    0 10px 32px rgba(15, 23, 42, 0.08),
+    0 2px 8px rgba(15, 23, 42, 0.04);
 }
 
 .nv-logo img {
@@ -289,25 +296,12 @@ body {
   transform-origin: center;
 }
 
-.hm.open span:nth-child(1) {
-  transform: rotate(45deg);
-  translate: 0 4px;
-}
-
-.hm.open span:nth-child(2) {
-  opacity: 0;
-  transform: scaleX(0);
-}
-
-.hm.open span:nth-child(3) {
-  transform: rotate(-45deg);
-  translate: 0 -4px;
-}
-
+/* Hamburger stays as 3 lines always (no X morph) */
 /* Hide hamburger completely when menu is open — cleaner look */
 body.menu-open .hm {
   opacity: 0;
   pointer-events: none;
+  visibility: hidden;
 }
 
 /* ── Floating card mobile menu ── */
@@ -328,7 +322,7 @@ body.menu-open .hm {
 
 .fm {
   position: fixed;
-  top: 16px;
+  top: 88px;
   right: 16px;
   width: min(320px, calc(100vw - 32px));
   z-index: 1002;
@@ -365,6 +359,14 @@ body.menu-open .hm {
 
 .fm-header .nv-logo img {
   height: 24px;
+}
+
+.fm-label {
+  font-family: var(--font-display);
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--tx);
+  letter-spacing: 0.02em;
 }
 
 .fm-close {
@@ -3017,7 +3019,7 @@ body.menu-open .hm {
 
 @media (max-width: 768px) {
   .site-container { width: min(1200px, calc(100% - 2.5rem)); }
-  .nv { padding: 14px 24px; }
+  .nv { padding: 11px 20px; top: 12px; left: 12px; right: 12px; border-radius: 20px; }
   .nl, .nv-cta-desktop { display: none !important; }
   .hm { display: flex; }
   .fm { display: block; }
