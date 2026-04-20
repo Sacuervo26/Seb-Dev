@@ -1,0 +1,6 @@
+name = "seb-web"
+compatibility_date = "2025-04-19"
+
+[assets]
+directory = "./dist"
+not_found_handling = "404-page"
