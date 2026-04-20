@@ -6,6 +6,7 @@ const projects = [
     type: "Página dinámica",
     image: "/alma-studio.jpg",
     href: "https://almamakeup.com.co/",
+    private: false,
   },
   {
     name: "Clínica Veterinaria Latidos",
@@ -13,6 +14,7 @@ const projects = [
     type: "Página dinámica",
     image: "/clinica-latidos.webp",
     href: "https://clinica-veterinaria-latidos-ld.vercel.app/",
+    private: false,
   },
   {
     name: "Envueltos El Mana",
@@ -20,20 +22,15 @@ const projects = [
     type: "Página estática",
     image: "/envueltos-el-mana.jpg",
     href: "https://envueltos-el-mana.vercel.app",
+    private: false,
   },
   {
-    name: "Panadería Artesanal",
-    domain: "panaderiaartesanal.com",
-    type: "Página estática",
-    image: "https://picsum.photos/seed/bakery/800/500",
+    name: "Metrics Planitar",
+    domain: "metrics-planitar.com",
+    type: "Dashboard privado",
+    image: "/metrics-planitar.webp",
     href: "#",
-  },
-  {
-    name: "Café Montaña",
-    domain: "cafemontana.co",
-    type: "Página dinámica",
-    image: "https://picsum.photos/seed/coffee/800/500",
-    href: "#",
+    private: true,
   },
 ];
 ---
@@ -52,27 +49,41 @@ const projects = [
 
       <div class="pjc-track-container" id="pjcContainer">
         <div class="pjc-track" id="pjcTrack">
-          {projects.map((p) => (
-            <a href={p.href} target="_blank" rel="noopener noreferrer" class="pjc-card">
-              <div class="pjc-browser">
-                <div class="pjc-browser-bar">
-                  <span class="pjc-dot" style="background:#ff5f57"></span>
-                  <span class="pjc-dot" style="background:#ffbd2e"></span>
-                  <span class="pjc-dot" style="background:#28c840"></span>
-                  <div class="pjc-url">{p.domain}</div>
+          {projects.map((p) => {
+            const Tag = p.private ? "div" : "a";
+            const linkProps = p.private
+              ? {}
+              : { href: p.href, target: "_blank", rel: "noopener noreferrer" };
+            return (
+              <Tag class:list={["pjc-card", p.private && "pjc-card-private"]} {...linkProps}>
+                <div class="pjc-browser">
+                  <div class="pjc-browser-bar">
+                    <span class="pjc-dot" style="background:#ff5f57"></span>
+                    <span class="pjc-dot" style="background:#ffbd2e"></span>
+                    <span class="pjc-dot" style="background:#28c840"></span>
+                    <div class="pjc-url">{p.domain}</div>
+                    {p.private && (
+                      <span class="pjc-lock" title="Proyecto privado">
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                          <rect x="3" y="11" width="18" height="11" rx="2"/>
+                          <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                        </svg>
+                      </span>
+                    )}
+                  </div>
+                  <div class="pjc-browser-content">
+                    <img src={p.image} alt={p.name} loading="lazy" />
+                  </div>
                 </div>
-                <div class="pjc-browser-content">
-                  <img src={p.image} alt={p.name} loading="lazy" />
+                <div class="pjc-info">
+                  <h3 class="pjc-name">{p.name}</h3>
+                  <span class:list={["pjc-badge", p.private ? "pjc-badge-priv" : (p.type === "Página dinámica" ? "pjc-badge-dyn" : "pjc-badge-st")]}>
+                    {p.type}
+                  </span>
                 </div>
-              </div>
-              <div class="pjc-info">
-                <h3 class="pjc-name">{p.name}</h3>
-                <span class:list={["pjc-badge", p.type === "Página dinámica" ? "pjc-badge-dyn" : "pjc-badge-st"]}>
-                  {p.type}
-                </span>
-              </div>
-            </a>
-          ))}
+              </Tag>
+            );
+          })}
         </div>
       </div>
 

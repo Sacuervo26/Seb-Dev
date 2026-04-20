@@ -234,15 +234,13 @@ body {
   border-color: var(--ac);
 }
 
-/* Mobile menu highlight */
+/* Mobile menu highlight "Antes de empezar" */
 .fm-link-highlight {
-  background: rgba(37, 99, 235, 0.12) !important;
-  border: 1.5px solid rgba(37, 99, 235, 0.3) !important;
-  border-radius: 50px !important;
-  padding: 10px 16px !important;
+  background: rgba(37, 99, 235, 0.1) !important;
+  border: 1px solid rgba(37, 99, 235, 0.25) !important;
   color: var(--ac) !important;
   font-weight: 600 !important;
-  margin: 4px 0;
+  margin: 2px 0;
 }
 
 .fm-link-highlight:hover {
@@ -255,7 +253,6 @@ body {
   background: var(--ac) !important;
   color: var(--wh) !important;
   border-color: var(--ac) !important;
-  border-left: 1.5px solid var(--ac) !important;
 }
 
 .nv-cta:hover {
@@ -307,11 +304,10 @@ body {
   translate: 0 -4px;
 }
 
-.hm.open {
-  border: 1.5px solid var(--brd);
-  border-radius: 10px;
-  background: var(--bg);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+/* Hide hamburger completely when menu is open — cleaner look */
+body.menu-open .hm {
+  opacity: 0;
+  pointer-events: none;
 }
 
 /* ── Floating card mobile menu ── */
@@ -332,20 +328,23 @@ body {
 
 .fm {
   position: fixed;
-  top: 70px;
+  top: 16px;
   right: 16px;
-  width: min(300px, calc(100vw - 40px));
+  width: min(320px, calc(100vw - 32px));
   z-index: 1002;
   background: var(--bg);
-  border: 1.5px solid var(--brd);
-  border-radius: 20px;
-  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.12), 0 4px 16px rgba(0, 0, 0, 0.04);
-  padding: 20px;
+  border: 1px solid var(--brd);
+  border-radius: 24px;
+  box-shadow:
+    0 24px 64px rgba(15, 23, 42, 0.14),
+    0 8px 20px rgba(15, 23, 42, 0.05),
+    0 0 0 1px rgba(255, 255, 255, 0.9) inset;
+  padding: 18px 16px;
   opacity: 0;
   visibility: hidden;
-  transform: translateY(-8px) scale(0.97);
+  transform: translateY(-12px) scale(0.96);
   transform-origin: top right;
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
   display: none;
 }
 
@@ -359,38 +358,52 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 16px;
-  padding-bottom: 14px;
+  margin-bottom: 12px;
+  padding: 4px 6px 14px;
   border-bottom: 1px solid var(--brd);
 }
 
 .fm-header .nv-logo img {
-  height: 26px;
+  height: 24px;
 }
 
-.fm-label {
-  font-size: 0.68rem;
-  font-weight: 600;
-  letter-spacing: 0.14em;
-  color: var(--txs);
+.fm-close {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 1px solid var(--brd);
+  background: var(--bg2);
+  color: var(--txm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.25s var(--e);
+}
+
+.fm-close:hover {
+  background: var(--ac);
+  color: var(--wh);
+  border-color: var(--ac);
+  transform: rotate(90deg);
 }
 
 .fm-links {
   display: flex;
   flex-direction: column;
-  gap: 2px;
-  margin-bottom: 16px;
+  gap: 4px;
+  margin-bottom: 14px;
 }
 
 .fm-link {
-  font-size: 0.95rem;
+  font-size: 0.94rem;
   font-weight: 500;
   color: var(--txm);
   text-decoration: none;
-  padding: 10px 14px;
-  border-radius: 12px;
-  transition: all 0.25s ease;
-  border-left: 3px solid transparent;
+  padding: 11px 18px;
+  border-radius: 100px;
+  transition: all 0.25s var(--e);
+  border: 1px solid transparent;
 }
 
 .fm-link:hover {
@@ -402,22 +415,23 @@ body {
   color: var(--ac);
   font-weight: 600;
   background: var(--acl);
-  border-left-color: var(--ac);
+  border-color: rgba(37, 99, 235, 0.2);
 }
 
 .fm-bottom {
   padding-top: 14px;
   border-top: 1px solid var(--brd);
+  padding-inline: 4px;
 }
 
 .fm-cta {
   display: block;
   width: 100%;
   text-align: center;
-  padding: 12px;
+  padding: 13px;
   background: var(--ac);
   color: var(--wh);
-  border-radius: 12px;
+  border-radius: 100px;
   font-weight: 600;
   font-size: 0.92rem;
   text-decoration: none;
@@ -426,7 +440,8 @@ body {
 
 .fm-cta:hover {
   background: var(--acd);
-  box-shadow: 0 6px 20px var(--acg);
+  box-shadow: 0 8px 24px var(--acg);
+  transform: translateY(-1px);
 }
 
 .nv-cta-desktop { display: inline-block; }
@@ -2566,6 +2581,28 @@ body {
 .pjc-badge-st {
   background: #f0f2f8;
   color: var(--txm);
+}
+
+.pjc-badge-priv {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.pjc-card-private {
+  cursor: default;
+}
+
+.pjc-lock {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 6px;
+  background: #fef3c7;
+  color: #d97706;
+  margin-left: 6px;
+  flex-shrink: 0;
 }
 
 .pjc-arrow {
