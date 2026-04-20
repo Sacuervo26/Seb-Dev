@@ -1,0 +1,230 @@
+---
+const projects = [
+  {
+    name: "Almamakeup",
+    domain: "almamakeup.com.co",
+    type: "Página dinámica",
+    image: "/alma-studio.jpg",
+    href: "https://almamakeup.com.co/",
+  },
+  {
+    name: "Clínica Veterinaria Latidos",
+    domain: "clinica-veterinaria-latidos-ld.vercel.app",
+    type: "Página dinámica",
+    image: "/clinica-latidos.webp",
+    href: "https://clinica-veterinaria-latidos-ld.vercel.app/",
+  },
+  {
+    name: "Envueltos El Mana",
+    domain: "envueltos-el-mana.vercel.app",
+    type: "Página estática",
+    image: "/envueltos-el-mana.jpg",
+    href: "https://envueltos-el-mana.vercel.app",
+  },
+  {
+    name: "Panadería Artesanal",
+    domain: "panaderiaartesanal.com",
+    type: "Página estática",
+    image: "https://picsum.photos/seed/bakery/800/500",
+    href: "#",
+  },
+  {
+    name: "Café Montaña",
+    domain: "cafemontana.co",
+    type: "Página dinámica",
+    image: "https://picsum.photos/seed/coffee/800/500",
+    href: "#",
+  },
+];
+---
+
+<section class="pjc-section">
+  <div class="pjc-container">
+    <div class="pjc-header ao">
+      <p class="pjc-label">Proyectos</p>
+      <h2 class="pjc-title">Algunos de los <span class="hl">sitios que he diseñado</span></h2>
+    </div>
+
+    <div class="pjc-wrap" id="pjcWrap">
+      <button class="pjc-arrow pjc-arrow-left" id="pjcArrowLeft" aria-label="Anterior">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+      </button>
+
+      <div class="pjc-track-container" id="pjcContainer">
+        <div class="pjc-track" id="pjcTrack">
+          {projects.map((p) => (
+            <a href={p.href} target="_blank" rel="noopener noreferrer" class="pjc-card">
+              <div class="pjc-browser">
+                <div class="pjc-browser-bar">
+                  <span class="pjc-dot" style="background:#ff5f57"></span>
+                  <span class="pjc-dot" style="background:#ffbd2e"></span>
+                  <span class="pjc-dot" style="background:#28c840"></span>
+                  <div class="pjc-url">{p.domain}</div>
+                </div>
+                <div class="pjc-browser-content">
+                  <img src={p.image} alt={p.name} loading="lazy" />
+                </div>
+              </div>
+              <div class="pjc-info">
+                <h3 class="pjc-name">{p.name}</h3>
+                <span class:list={["pjc-badge", p.type === "Página dinámica" ? "pjc-badge-dyn" : "pjc-badge-st"]}>
+                  {p.type}
+                </span>
+              </div>
+            </a>
+          ))}
+        </div>
+      </div>
+
+      <button class="pjc-arrow pjc-arrow-right" id="pjcArrowRight" aria-label="Siguiente">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+      </button>
+    </div>
+
+    <div class="pjc-dots" id="pjcDots">
+      {projects.map((_, i) => (
+        <button class:list={["pjc-dotnav", i === 0 && "active"]} data-index={i} aria-label={`Ir al proyecto ${i + 1}`}></button>
+      ))}
+    </div>
+  </div>
+</section>
+
+<script is:inline>
+  function initProjectsCarousel() {
+    var track = document.getElementById("pjcTrack");
+    var container = document.getElementById("pjcContainer");
+    var arrowLeft = document.getElementById("pjcArrowLeft");
+    var arrowRight = document.getElementById("pjcArrowRight");
+    var dotsContainer = document.getElementById("pjcDots");
+    var wrap = document.getElementById("pjcWrap");
+    if (!track || !container) return;
+
+    var cards = track.querySelectorAll(".pjc-card");
+    if (!cards.length) return;
+
+    var current = 0;
+    var autoPlayInterval = null;
+    var isDragging = false;
+    var startX = 0;
+    var startTranslate = 0;
+
+    function getCardWidth() {
+      if (!cards[0]) return 0;
+      var style = window.getComputedStyle(track);
+      var gap = parseInt(style.gap) || 0;
+      return cards[0].offsetWidth + gap;
+    }
+
+    function getVisibleCards() {
+      var w = window.innerWidth;
+      if (w < 768) return 1;
+      if (w < 1100) return 2;
+      return 3;
+    }
+
+    function getMaxIndex() {
+      return Math.max(0, cards.length - getVisibleCards());
+    }
+
+    function update() {
+      var offset = -current * getCardWidth();
+      track.style.transform = "translateX(" + offset + "px)";
+      var dots = dotsContainer.querySelectorAll(".pjc-dotnav");
+      dots.forEach(function(d, i) {
+        d.classList.toggle("active", i === current);
+      });
+    }
+
+    function move(dir) {
+      var max = getMaxIndex();
+      current += dir;
+      if (current > max) current = 0;
+      if (current < 0) current = max;
+      update();
+    }
+
+    function goTo(i) {
+      var max = getMaxIndex();
+      current = Math.min(Math.max(0, i), max);
+      update();
+    }
+
+    arrowLeft.addEventListener("click", function() { move(-1); restartAutoPlay(); });
+    arrowRight.addEventListener("click", function() { move(1); restartAutoPlay(); });
+
+    dotsContainer.querySelectorAll(".pjc-dotnav").forEach(function(dot) {
+      dot.addEventListener("click", function() {
+        goTo(parseInt(dot.dataset.index, 10));
+        restartAutoPlay();
+      });
+    });
+
+    // Drag / Swipe
+    function dragStart(e) {
+      isDragging = true;
+      startX = (e.touches ? e.touches[0].clientX : e.clientX);
+      startTranslate = -current * getCardWidth();
+      track.style.transition = "none";
+    }
+
+    function dragMove(e) {
+      if (!isDragging) return;
+      var x = (e.touches ? e.touches[0].clientX : e.clientX);
+      var diff = x - startX;
+      track.style.transform = "translateX(" + (startTranslate + diff) + "px)";
+    }
+
+    function dragEnd(e) {
+      if (!isDragging) return;
+      isDragging = false;
+      track.style.transition = "";
+      var x = (e.changedTouches ? e.changedTouches[0].clientX : e.clientX);
+      var diff = x - startX;
+      if (Math.abs(diff) > 60) {
+        move(diff > 0 ? -1 : 1);
+      } else {
+        update();
+      }
+      restartAutoPlay();
+    }
+
+    container.addEventListener("mousedown", dragStart);
+    container.addEventListener("mousemove", dragMove);
+    container.addEventListener("mouseup", dragEnd);
+    container.addEventListener("mouseleave", function(e) { if (isDragging) dragEnd(e); });
+    container.addEventListener("touchstart", dragStart, { passive: true });
+    container.addEventListener("touchmove", dragMove, { passive: true });
+    container.addEventListener("touchend", dragEnd);
+
+    // Auto-play
+    function startAutoPlay() {
+      if (autoPlayInterval) clearInterval(autoPlayInterval);
+      autoPlayInterval = setInterval(function() { move(1); }, 4000);
+    }
+
+    function stopAutoPlay() {
+      if (autoPlayInterval) clearInterval(autoPlayInterval);
+    }
+
+    function restartAutoPlay() {
+      stopAutoPlay();
+      startAutoPlay();
+    }
+
+    wrap.addEventListener("mouseenter", stopAutoPlay);
+    wrap.addEventListener("mouseleave", startAutoPlay);
+
+    // Resize
+    window.addEventListener("resize", function() {
+      var max = getMaxIndex();
+      if (current > max) current = max;
+      update();
+    });
+
+    update();
+    startAutoPlay();
+  }
+
+  initProjectsCarousel();
+  document.addEventListener("astro:after-swap", initProjectsCarousel);
+</script>

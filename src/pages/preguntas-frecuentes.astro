@@ -1,0 +1,18 @@
+---
+import "../styles/global.css";
+import Layout from "../layouts/Layout.astro";
+import Navbar from "../components/Navbar.astro";
+import FAQPage from "../components/FAQPage.astro";
+import Footer from "../components/Footer.astro";
+---
+
+<Layout
+  title="Seb/Web | Preguntas frecuentes"
+  description="Las respuestas a las preguntas más comunes sobre nuestros servicios de diseño y desarrollo web."
+>
+  <Navbar currentPath="/preguntas-frecuentes" />
+  <main>
+    <FAQPage />
+  </main>
+  <Footer />
+</Layout>

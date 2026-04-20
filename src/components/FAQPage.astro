@@ -1,0 +1,169 @@
+---
+const tabs = [
+  { id: "all", label: "Todas" },
+  { id: "antes", label: "Antes de empezar" },
+  { id: "hosting", label: "Hosting y dominio" },
+  { id: "despues", label: "Después de la entrega" },
+  { id: "pagos", label: "Pagos" },
+];
+
+const categories = [
+  {
+    id: "antes",
+    title: "Antes de empezar",
+    items: [
+      { q: "¿Qué necesito para empezar mi página web?", a: "Solo necesitas tener claro <strong>qué hace tu negocio</strong>, <strong>a quién le vendes</strong> y tener tu <strong>logo</strong> (si lo tienes). Yo me encargo del resto: estructura, diseño, desarrollo y publicación. Te enviaré una guía con todo lo que necesitas preparar." },
+      { q: "¿Cuánto tiempo tarda en estar lista mi página?", a: "El plan <strong>Emprendedor</strong> se entrega en <strong>5 días hábiles</strong> y el <strong>Profesional</strong> en <strong>8 a 10 días</strong>, una vez tengas aprobado el diseño y me envíes el contenido." },
+      { q: "¿Puedo ver avances antes de que esté terminada?", a: "Sí. Te muestro avances durante el proceso para que <strong>apruebes el diseño antes de publicar</strong>. Cada plan incluye revisiones para que puedas pedir ajustes." },
+      { q: "¿Necesito saber de tecnología o programación?", a: "<strong>No.</strong> Yo me encargo de toda la parte técnica. Tú solo me das la información de tu negocio y yo hago el resto. No necesitas saber nada de código, hosting ni dominios." },
+    ],
+  },
+  {
+    id: "hosting",
+    title: "Hosting y dominio",
+    items: [
+      { q: "¿Qué es el dominio y qué es el hosting?", a: "El <strong>dominio</strong> es la dirección de tu página (ejemplo: tunegocio.com). El <strong>hosting</strong> es el espacio en internet donde vive tu sitio. Piénsalo así: el dominio es la dirección de tu casa y el hosting es el terreno donde está construida." },
+      { q: "¿El dominio y hosting están incluidos?", a: "En el plan <strong>Emprendedor ($250.000)</strong> el hosting del primer año está incluido, el dominio no. En el plan <strong>Profesional ($390.000)</strong> tanto el hosting como el dominio del primer año están incluidos." },
+      { q: "¿Cuánto cuesta renovar después del primer año?", a: "Plan Emprendedor: <strong>$99.000+IVA/año</strong> (hosting). Plan Profesional: <strong>$149.000+IVA/año</strong> (hosting + dominio). Te aviso antes del vencimiento para que no se te pase." },
+      { q: "¿El dominio y el hosting quedan a mi nombre?", a: "<strong>Sí.</strong> Todo queda registrado a tu nombre. Tú eres el dueño de tu dominio y tu hosting. Yo solo administro el desarrollo." },
+    ],
+  },
+  {
+    id: "despues",
+    title: "Después de la entrega",
+    items: [
+      { q: "¿Mi página se va a ver bien en celulares?", a: "<strong>Sí.</strong> Todas las páginas que diseño son 100% responsive — se adaptan automáticamente a celulares, tablets y computadores." },
+      { q: "¿Puedo hacer cambios después de la entrega?", a: "Los cambios dentro de las <strong>revisiones incluidas</strong> en tu plan son sin costo. Después de la entrega, cambios menores se pueden cotizar aparte." },
+      { q: "¿Qué pasa si necesito más páginas en el futuro?", a: "Podemos <strong>escalar tu sitio en cualquier momento</strong>. Me escribes y evaluamos qué necesitas — ya sea agregar páginas, secciones o funcionalidades nuevas." },
+      { q: "¿Mi página aparecerá en Google?", a: "<strong>Sí.</strong> Todas las páginas incluyen optimización SEO básica o avanzada (según tu plan) para que Google pueda indexar tu sitio. El posicionamiento orgánico toma tiempo, pero tu página estará preparada desde el día uno." },
+    ],
+  },
+  {
+    id: "pagos",
+    title: "Pagos",
+    items: [
+      { q: "¿Cómo son las formas de pago?", a: "Se paga <strong>50% al iniciar</strong> y <strong>50% al entregar</strong> la página terminada. Acepto transferencia bancaria y Nequi." },
+      { q: "¿Hay costos ocultos?", a: "<strong>No.</strong> El precio que ves en los planes es lo que pagas por el diseño. Los únicos costos adicionales son la renovación anual de hosting/dominio, que está claramente especificada en cada plan. Sin sorpresas." },
+      { q: "¿Qué pasa si no me gusta el resultado?", a: "Para eso existen las <strong>revisiones incluidas</strong> en cada plan. Te muestro avances durante el proceso y tú apruebas antes de publicar. Mi objetivo es que quedes 100% satisfecho." },
+    ],
+  },
+];
+---
+
+<section class="ph" style="padding-bottom:24px;">
+  <div class="ph-bl"></div>
+  <p class="sl">Preguntas frecuentes</p>
+  <h1>¿Tienes dudas? Te <span class="hl">ayudamos</span></h1>
+  <p class="abs-intro ao">
+    Las respuestas a las preguntas más comunes sobre nuestros servicios de diseño y desarrollo web.
+  </p>
+</section>
+
+<div class="fqp-container">
+  <!-- Tabs -->
+  <div class="fqp-tabs ao">
+    {tabs.map((tab, i) => (
+      <button class:list={["fqp-tab", i === 0 && "active"]} data-filter={tab.id}>
+        {tab.label}
+      </button>
+    ))}
+  </div>
+
+  <!-- FAQ categories -->
+  {categories.map((cat) => (
+    <div class="fqp-group" data-group={cat.id}>
+      <h2 class="fqp-cat-title">{cat.title}</h2>
+      {cat.items.map((item) => (
+        <div class="fqp-card" data-category={cat.id}>
+          <button class="fqp-question">
+            <span class="fqp-question-text">{item.q}</span>
+            <div class="fqp-arrow">
+              <svg viewBox="0 0 14 14" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M3 5L7 9L11 5" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+            </div>
+          </button>
+          <div class="fqp-answer">
+            <div class="fqp-answer-text" set:html={item.a} />
+          </div>
+        </div>
+      ))}
+    </div>
+  ))}
+
+  <!-- CTA -->
+  <div class="abs-cta ao" style="margin-top:48px;">
+    <h2>¿Tienes otra pregunta?</h2>
+    <p>Escríbeme por WhatsApp y te respondo personalmente.</p>
+    <a href="https://wa.me/573013455585" target="_blank" rel="noreferrer" class="abs-cta-btn">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/></svg>
+      Preguntar por WhatsApp
+    </a>
+    <br />
+    <a href="/servicios" class="abs-cta-link">Ver planes y precios →</a>
+  </div>
+</div>
+
+<script is:inline>
+  function initFaqPage() {
+    var tabs = document.querySelectorAll(".fqp-tab");
+    var cards = document.querySelectorAll(".fqp-card");
+    var groups = document.querySelectorAll(".fqp-group");
+    if (!tabs.length) return;
+
+    // Accordion
+    cards.forEach(function(card) {
+      var q = card.querySelector(".fqp-question");
+      if (!q) return;
+      var newQ = q.cloneNode(true);
+      q.parentNode.replaceChild(newQ, q);
+      newQ.addEventListener("click", function() {
+        var isOpen = card.classList.contains("open");
+        // Close all
+        document.querySelectorAll(".fqp-card.open").forEach(function(c) {
+          if (c !== card) {
+            c.classList.remove("open");
+            var ans = c.querySelector(".fqp-answer");
+            if (ans) ans.style.maxHeight = "0";
+          }
+        });
+        if (isOpen) {
+          card.classList.remove("open");
+          var a = card.querySelector(".fqp-answer");
+          if (a) a.style.maxHeight = "0";
+        } else {
+          card.classList.add("open");
+          var a = card.querySelector(".fqp-answer");
+          if (a) a.style.maxHeight = a.scrollHeight + "px";
+        }
+      });
+    });
+
+    // Filter tabs
+    tabs.forEach(function(tab) {
+      var newTab = tab.cloneNode(true);
+      tab.parentNode.replaceChild(newTab, tab);
+      newTab.addEventListener("click", function() {
+        document.querySelectorAll(".fqp-tab").forEach(function(t) { t.classList.remove("active"); });
+        newTab.classList.add("active");
+        var filter = newTab.dataset.filter;
+        groups.forEach(function(g) {
+          if (filter === "all" || g.dataset.group === filter) {
+            g.style.display = "";
+          } else {
+            g.style.display = "none";
+          }
+        });
+        // Close all open cards when filtering
+        document.querySelectorAll(".fqp-card.open").forEach(function(c) {
+          c.classList.remove("open");
+          var a = c.querySelector(".fqp-answer");
+          if (a) a.style.maxHeight = "0";
+        });
+      });
+    });
+  }
+
+  initFaqPage();
+  document.addEventListener("astro:after-swap", initFaqPage);
+</script>
