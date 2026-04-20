@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://seb-dev-nu.vercel.app/sitemap-index.xml
+Sitemap: https://sebweeb.com/sitemap-index.xml
