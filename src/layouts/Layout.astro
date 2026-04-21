@@ -5,7 +5,7 @@ import FloatingWhatsApp from "../components/FloatingWhatsApp.astro";
 const siteUrl = "https://sebweeb.com";
 
 const {
-  title = "Seb/Web | Diseño y desarrollo web en Colombia",
+  title = "SebWeeb | Diseño y desarrollo web en Colombia",
   description = "Diseño y desarrollo de páginas web profesionales en Colombia. Sitios modernos, rápidos y optimizados para tu negocio desde $250.000 COP.",
   ogImage = "/perfil.png",
   keywords = "diseño web Colombia, desarrollador web, páginas web profesionales, diseño de sitios web, desarrollo web Astro, diseñador web Bogotá, páginas web para negocios, rediseño web, UI UX Colombia, Sebastián Cuervo",
@@ -40,9 +40,9 @@ const canonicalUrl = new URL(Astro.url.pathname, siteUrl).href;
     <meta property="og:image" content={`${siteUrl}${ogImage}`} />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content="Seb/Web - Diseño y desarrollo web en Colombia" />
+    <meta property="og:image:alt" content="SebWeeb - Diseño y desarrollo web en Colombia" />
     <meta property="og:locale" content="es_CO" />
-    <meta property="og:site_name" content="Seb/Web" />
+    <meta property="og:site_name" content="SebWeeb" />
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
@@ -65,8 +65,8 @@ const canonicalUrl = new URL(Astro.url.pathname, siteUrl).href;
     <script type="application/ld+json" set:html={JSON.stringify({
       "@context": "https://schema.org",
       "@type": "WebSite",
-      "name": "Seb/Web",
-      "alternateName": "Seb/Web - Sebastián Cuervo",
+      "name": "SebWeeb",
+      "alternateName": "SebWeeb - Sebastián Cuervo",
       "url": siteUrl,
       "inLanguage": "es-CO",
       "publisher": {
@@ -80,8 +80,8 @@ const canonicalUrl = new URL(Astro.url.pathname, siteUrl).href;
       "@context": "https://schema.org",
       "@type": "ProfessionalService",
       "@id": `${siteUrl}/#business`,
-      "name": "Seb/Web - Sebastián Cuervo",
-      "alternateName": "Seb/Web",
+      "name": "SebWeeb - Sebastián Cuervo",
+      "alternateName": "SebWeeb",
       "description": "Diseño y desarrollo de sitios web modernos, claros y profesionales para marcas y negocios en Colombia.",
       "url": siteUrl,
       "logo": `${siteUrl}/Logo.png`,
@@ -175,7 +175,7 @@ const canonicalUrl = new URL(Astro.url.pathname, siteUrl).href;
       "email": "sacuervo.dev@gmail.com",
       "telephone": "+573013455585",
       "nationality": { "@type": "Country", "name": "Colombia" },
-      "worksFor": { "@type": "Organization", "name": "Seb/Web" }
+      "worksFor": { "@type": "Organization", "name": "SebWeeb" }
     })} />
   </head>
   <body>
