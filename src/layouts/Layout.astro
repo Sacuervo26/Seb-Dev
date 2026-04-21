@@ -5,9 +5,10 @@ import FloatingWhatsApp from "../components/FloatingWhatsApp.astro";
 const siteUrl = "https://sebweeb.com";
 
 const {
-  title = "Seb/Web | Diseño y desarrollo web moderno",
-  description = "Diseño y desarrollo de sitios web modernos con enfoque visual, estructura clara y experiencia cuidada.",
+  title = "Seb/Web | Diseño y desarrollo web en Colombia",
+  description = "Diseño y desarrollo de páginas web profesionales en Colombia. Sitios modernos, rápidos y optimizados para tu negocio desde $250.000 COP.",
   ogImage = "/perfil.png",
+  keywords = "diseño web Colombia, desarrollador web, páginas web profesionales, diseño de sitios web, desarrollo web Astro, diseñador web Bogotá, páginas web para negocios, rediseño web, UI UX Colombia, Sebastián Cuervo",
 } = Astro.props;
 
 const canonicalUrl = new URL(Astro.url.pathname, siteUrl).href;
@@ -19,8 +20,13 @@ const canonicalUrl = new URL(Astro.url.pathname, siteUrl).href;
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={description} />
-    <meta name="robots" content="index, follow" />
+    <meta name="keywords" content={keywords} />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
+    <meta name="googlebot" content="index, follow" />
     <meta name="author" content="Sebastián Cuervo" />
+    <meta name="geo.region" content="CO" />
+    <meta name="geo.placename" content="Colombia" />
+    <meta name="language" content="Spanish" />
     <meta name="theme-color" content="#ffffff" />
 
     <!-- Canonical -->
@@ -32,6 +38,9 @@ const canonicalUrl = new URL(Astro.url.pathname, siteUrl).href;
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonicalUrl} />
     <meta property="og:image" content={`${siteUrl}${ogImage}`} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Seb/Web - Diseño y desarrollo web en Colombia" />
     <meta property="og:locale" content="es_CO" />
     <meta property="og:site_name" content="Seb/Web" />
 
@@ -52,12 +61,28 @@ const canonicalUrl = new URL(Astro.url.pathname, siteUrl).href;
     <title>{title}</title>
     <ViewTransitions />
 
-    <!-- JSON-LD Structured Data -->
+    <!-- JSON-LD: WebSite -->
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "Seb/Web",
+      "alternateName": "Seb/Web - Sebastián Cuervo",
+      "url": siteUrl,
+      "inLanguage": "es-CO",
+      "publisher": {
+        "@type": "Person",
+        "name": "Sebastián Cuervo"
+      }
+    })} />
+
+    <!-- JSON-LD: ProfessionalService (local business) -->
     <script type="application/ld+json" set:html={JSON.stringify({
       "@context": "https://schema.org",
       "@type": "ProfessionalService",
+      "@id": `${siteUrl}/#business`,
       "name": "Seb/Web - Sebastián Cuervo",
-      "description": "Diseño y desarrollo de sitios web modernos, claros y profesionales para marcas y negocios.",
+      "alternateName": "Seb/Web",
+      "description": "Diseño y desarrollo de sitios web modernos, claros y profesionales para marcas y negocios en Colombia.",
       "url": siteUrl,
       "logo": `${siteUrl}/Logo.png`,
       "image": `${siteUrl}/perfil.png`,
@@ -65,42 +90,92 @@ const canonicalUrl = new URL(Astro.url.pathname, siteUrl).href;
       "email": "sacuervo.dev@gmail.com",
       "address": {
         "@type": "PostalAddress",
-        "addressCountry": "CO"
+        "addressCountry": "CO",
+        "addressRegion": "Colombia"
       },
+      "areaServed": [
+        { "@type": "Country", "name": "Colombia" },
+        { "@type": "Place", "name": "Latinoamérica" }
+      ],
+      "serviceType": [
+        "Diseño web",
+        "Desarrollo web",
+        "Rediseño de sitios web",
+        "UI/UX",
+        "Acompañamiento técnico"
+      ],
       "priceRange": "$250.000 - $390.000 COP",
+      "currenciesAccepted": "COP",
+      "paymentAccepted": "Transferencia bancaria, PSE, Nequi",
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "+573013455585",
+        "contactType": "customer service",
+        "email": "sacuervo.dev@gmail.com",
+        "areaServed": "CO",
+        "availableLanguage": ["Spanish", "es"]
+      },
       "sameAs": [],
       "founder": {
         "@type": "Person",
         "name": "Sebastián Cuervo",
         "jobTitle": "Arquitecto y Desarrollador Web",
-        "image": `${siteUrl}/perfil.png`
+        "image": `${siteUrl}/perfil.png`,
+        "nationality": "CO"
       },
       "hasOfferCatalog": {
         "@type": "OfferCatalog",
-        "name": "Servicios de diseño web",
+        "name": "Servicios de diseño y desarrollo web",
         "itemListElement": [
           {
             "@type": "Offer",
             "itemOffered": {
               "@type": "Service",
               "name": "Plan Emprendedor",
-              "description": "Página web estática de 1 a 3 páginas"
+              "description": "Página web estática de 1 a 3 páginas, diseño moderno y responsive."
             },
             "price": "250000",
-            "priceCurrency": "COP"
+            "priceCurrency": "COP",
+            "availability": "https://schema.org/InStock"
           },
           {
             "@type": "Offer",
             "itemOffered": {
               "@type": "Service",
               "name": "Plan Profesional",
-              "description": "Sitio web dinámico con animaciones hasta 5 páginas"
+              "description": "Sitio web dinámico con animaciones, hasta 5 páginas y optimización completa."
             },
             "price": "390000",
-            "priceCurrency": "COP"
+            "priceCurrency": "COP",
+            "availability": "https://schema.org/InStock"
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Plan Rediseño",
+              "description": "Rediseño completo de sitios web existentes con enfoque en conversión y experiencia de usuario."
+            },
+            "priceCurrency": "COP",
+            "availability": "https://schema.org/InStock"
           }
         ]
       }
+    })} />
+
+    <!-- JSON-LD: Person -->
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Sebastián Cuervo",
+      "alternateName": "Seb",
+      "jobTitle": "Arquitecto y Desarrollador Web",
+      "url": siteUrl,
+      "image": `${siteUrl}/perfil.png`,
+      "email": "sacuervo.dev@gmail.com",
+      "telephone": "+573013455585",
+      "nationality": { "@type": "Country", "name": "Colombia" },
+      "worksFor": { "@type": "Organization", "name": "Seb/Web" }
     })} />
   </head>
   <body>
